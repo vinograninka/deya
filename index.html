@@ -71,76 +71,111 @@ section.paper{padding:62px 0}
 .section-heading h2{font-size:clamp(2.4rem,4.5vw,4.1rem);letter-spacing:-.035em}
 .section-heading h2 em{color:var(--clay);font-weight:400}
 .section-heading p{color:var(--slate);max-width:42ch}
-.workbench{background:var(--white);border:1px solid var(--line);border-radius:28px;box-shadow:0 18px 58px #30261711;overflow:hidden;display:grid;grid-template-columns:224px minmax(0,1fr);min-height:550px}
-.rail{background:var(--dusk);color:var(--cream);padding:24px 16px;display:flex;flex-direction:column;gap:22px}
-.rail-head{padding:2px 10px}
-.rail .eyebrow{color:var(--mist);font-size:.64rem}
-.rail-name{font:400 28px var(--serif);margin-top:4px}
-.project-nav{display:grid;gap:6px}
-.project-nav button{width:100%;border:1px solid transparent;border-radius:13px;background:transparent;color:var(--cream);text-align:left;display:flex;align-items:center;gap:10px;min-height:47px;padding:7px 10px}
-.project-nav button:hover,.project-nav button[aria-pressed="true"]{background:var(--indigo);border-color:#ede7dc29}
-.project-nav button[aria-pressed="true"] .nav-label{font-weight:700}
-.project-nav .index{color:var(--mist);font:400 11px var(--mono)}
-.project-nav [aria-pressed="true"] .index{color:var(--apricot)}
-.rail-foot{margin-top:auto;padding:15px 10px 0;border-top:1px solid #ede7dc30;color:var(--soft);font-size:.77rem}
-.rail-foot strong{display:block;color:var(--cream);font-weight:600;font-size:.88rem}
-.work-pane{padding:27px 30px 25px;min-width:0}
-.pane-top{display:flex;justify-content:space-between;gap:12px;align-items:start;margin-bottom:19px}
-.pane-top h3{font-size:37px;letter-spacing:-.035em}
-.pane-top .eyebrow{color:var(--slate);margin-bottom:3px;font-size:.64rem}
-.chip{display:inline-flex;align-items:center;padding:4px 10px;border:1px solid #cfc8bb;border-radius:99px;font-size:.73rem;font-weight:600;line-height:1.45}
-.chip.success{background:#e2efe5;border-color:#c5ddce;color:#254b39}
-.chip.warm{background:#f4e6d7;border-color:#e4c9b6;color:#673c24}
-.pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:18px}
-.pipeline span{min-width:0;color:var(--slate);font-size:.72rem;line-height:1.2;border-top:3px solid #e7dfd3;padding-top:6px}
-.pipeline .complete{border-color:#9ab5a0}
-.pipeline .active{border-color:#b47755;color:var(--midnight);font-weight:700}
-.scene{display:grid;grid-template-columns:minmax(0,1fr) 155px;gap:20px;min-height:253px}
-.scene h4{margin:0 0 7px;font-size:1.08rem}
-.scene p{font-size:.92rem;color:var(--slate)}
-.bundle{background:var(--paper);border:1px solid #e7ded1;border-radius:15px;padding:13px 15px;margin-top:12px;font-size:.87rem}
-.bundle p{font-size:.86rem;color:var(--midnight)}
-.bundle .eyebrow{font-size:.63rem;color:var(--slate);margin-bottom:3px}
-.bundle ul{margin:0;padding-left:17px}
-.frame{position:relative;border-radius:16px;overflow:hidden;min-height:235px;background:#282b3b;color:var(--cream);border:1px solid #121a2b}
-.frame-visual{position:absolute;inset:10% 11% 21%;border:1px solid #d5b79c5c}
-.room{position:absolute;inset:10% 12%;border:1px solid #dfcbb5;color:#d5b79c}
-.room::before{content:"";position:absolute;inset:13% 12% 42% 44%;border:1px solid currentColor;border-bottom:0}
-.room::after{content:"";position:absolute;inset:61% 16% 16% 15%;border:1px solid currentColor;border-radius:8px;background:#d5b79c23;transition:background .35s,transform .35s}
-.frame[data-stage="1"] .room::after{transform:translateY(-6px);background:#afa2f050}
-.frame[data-stage="2"] .room::after,.frame[data-stage="3"] .room::after,.frame[data-stage="4"] .room::after{background:#e0a47a6b}
-.frame-name,.frame-label{position:absolute;left:10px;right:10px;text-align:center}
-.frame-name{top:9px;font-size:.67rem;color:#e8ceb8}
-.frame-label{bottom:10px;font-size:.78rem;line-height:1.2;font-weight:500}
-.work-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:16px;min-height:44px}
-.work-actions .restart{margin-left:auto}
-.footnote{margin-top:8px;color:var(--slate);font-size:.75rem}
-.test-description{color:var(--slate);margin-bottom:16px}
-.estimate{width:100%;border-collapse:collapse;font-size:.9rem}
-.estimate th,.estimate td{text-align:left;padding:11px 7px;border-bottom:1px solid var(--line)}
-.estimate th{color:var(--slate);font-size:.75rem;font-weight:600}
-.estimate th:last-child,.estimate td:last-child{text-align:right}
-.estimate input{width:65px;max-width:100%;min-height:40px;border:1px solid #cfc8bb;border-radius:8px;background:#fffdf9;padding:4px 6px}
+/* The NV page frames a neutral, ChatGPT-style working area. */
+.workbench{display:grid;grid-template-columns:236px minmax(0,1fr);border:1px solid #d8d7d5;border-radius:21px;overflow:hidden;background:#fff;box-shadow:0 18px 60px #30261715;min-height:645px;color:#202020;font:400 14px/1.5 system-ui,-apple-system,sans-serif}
+.gpt-sidebar{background:#f8f8f8;border-right:1px solid #ebebeb;padding:19px 12px;display:flex;flex-direction:column;gap:20px}
+.gpt-brand{display:flex;align-items:center;gap:10px;padding:5px 7px}
+.gpt-name{font-size:17px;font-weight:650;line-height:1.25}
+.gpt-brand small,.sidebar-label,.gpt-top .muted{font-size:11px;color:#606060}
+.gpt-brand small{display:block;margin-top:2px}
+.gpt-icon{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.project-nav{display:grid;gap:2px}
+.project-nav button{width:100%;border:0;border-radius:8px;background:transparent;color:#232323;text-align:left;display:flex;align-items:center;gap:9px;min-height:42px;padding:6px 10px;font-weight:500}
+.project-nav button[aria-pressed=true],.project-nav button:hover{background:#eaeaea}
+.sidebar-label{margin:0 10px 5px;font-weight:650}
+.sidebar-account{display:flex;align-items:center;gap:9px;margin-top:auto;padding:12px 7px 0;border-top:1px solid #e6e6e6}
+.avatar{display:grid;place-items:center;width:31px;height:31px;border-radius:100%;background:#e9e0f3;color:#4b3563;flex:none;font-size:12px;font-weight:700}
+.sidebar-account strong{display:block;font-size:13px}
+.sidebar-account small{color:#5b5b5b;font-size:11px}
+.work-pane{min-width:0;background:white}
+.gpt-top{min-height:60px;border-bottom:1px solid #efefef;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 22px}
+.gpt-crumb{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:650;min-width:0}
+.gpt-tag{display:inline-flex;align-items:center;gap:5px;border:1px solid #e1e1e1;border-radius:30px;padding:4px 9px;color:#505050;font-size:11px;line-height:1.2;white-space:nowrap}
+.thread{max-width:754px;margin:0 auto;padding:25px 26px 21px}
+.thread-title{font:680 clamp(1.22rem,2.4vw,1.62rem)/1.2 system-ui,-apple-system,sans-serif;margin:0 0 7px;letter-spacing:-.035em}
+.thread-intro{color:#535353;margin-bottom:20px;max-width:65ch}
+.chats{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 18px}
+.chats button{border:1px solid #e3e3e3;background:white;min-height:35px;border-radius:22px;padding:5px 11px;font-size:12px}
+.chats button[aria-pressed=true],.chats button:hover{background:#f2f2f2;border-color:#d3d3d3}
+.user-turn{max-width:88%;margin:0 0 16px auto;background:#f1f1f1;border-radius:20px 20px 5px 20px;padding:11px 15px;font-size:14px}
+.user-turn .gpt-tag{background:#fff;margin-bottom:6px}
+.assistant-line{display:flex;gap:10px;align-items:flex-start;margin:0 0 12px}
+.assistant-label{font-weight:650;font-size:12px;margin-bottom:3px}
+.assistant-avatar{display:grid;place-items:center;flex:none;width:26px;height:26px;border-radius:50%;border:1px solid #ddd;font-size:15px}
+.assistant-body{flex:1;min-width:0}
+.assistant-body p{color:#4a4a4a}
+.reel-track{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin:12px 0}
+.reel-track span{min-width:0;padding-top:4px;border-top:3px solid #e6e6e6;color:#535353;font-size:.72rem;line-height:1.2}
+.reel-track .complete{border-color:#91b4a4}
+.reel-track .active{border-color:#3c594c;color:#1f4435;font-weight:700}
+.result-card{background:#fafafa;border:1px solid #e5e5e5;border-radius:14px;padding:11px 13px;margin:9px 0;font-size:.88rem}
+.result-card strong{display:block;font-size:.75rem;color:#474747;margin-bottom:2px}
+.result-card p{color:#232323}
+.result-card p+p{margin-top:5px}
+.composer{display:flex;align-items:center;gap:10px;border:1px solid #ddd;border-radius:26px;min-height:52px;padding:6px 7px 6px 14px;margin-top:15px;box-shadow:0 2px 6px #0000000d}
+.composer-text{flex:1;min-width:0;color:#525252;font-size:.82rem}
+.chat-action{flex:none;display:inline-flex;justify-content:center;align-items:center;gap:6px;min-height:39px;padding:7px 12px;background:#242424;border:1px solid #242424;border-radius:22px;color:white;font-size:.8rem;font-weight:600;line-height:1.2;text-align:center}
+.chat-action:hover{background:#424242}
+.chat-action.secondary{background:#fff;color:#232323;border-color:#dbdbdb}
+.chat-action.secondary:hover{background:#f1f1f1}
+.thread-controls{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin-top:9px}
+.micro{font-size:.74rem;color:#5f5f5f;margin-top:8px}
+.pane-details{margin-top:15px;border-top:1px solid #e6e6e6}
+.pane-details summary{display:flex;justify-content:space-between;font-size:13px;gap:8px}
+.pane-details p{padding:0 0 10px;color:#4c4c4c}
+.calc-table{width:100%;border-collapse:collapse;font-size:.84rem;margin-top:7px;text-align:left}
+.calc-table th,.calc-table td{padding:8px 5px;border-bottom:1px solid #e7e7e7}
+.calc-table thead th{color:#555;font-size:.73rem}
+.calc-table th:last-child,.calc-table td:last-child{text-align:right}
+.calc-table input,.marked-input{width:63px;max-width:100%;min-height:38px;border:1px solid #ccc;border-radius:8px;background:#fff;padding:4px 6px}
 .money{white-space:nowrap;font-variant-numeric:tabular-nums}
-.estimate tfoot td{font-weight:700;border-bottom:0}
-.task-list{list-style:none;padding:0;margin:8px 0}
-.task-list li{display:flex;gap:10px;align-items:center;padding:11px 2px;border-bottom:1px solid var(--line)}
-.task-list input{width:19px;height:19px;accent-color:var(--midnight);flex:0 0 auto}
-.task-list label{flex:1;display:flex;justify-content:space-between;align-items:center;gap:8px;cursor:pointer;font-size:.92rem}
-.task-list input:checked+label .task-name{text-decoration:line-through;color:var(--slate)}
-.notice{margin-top:12px;border:1px solid #bdd0c5;background:#edf5ec;border-radius:14px;padding:11px 14px;font-size:.89rem}
-#agents{padding-top:24px}
-.agent-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.agent-group{background:var(--white);border:1px solid var(--line);border-radius:19px;padding:19px 22px}
-.agent-group>h3{font-size:26px;margin-bottom:8px}
-details{border-top:1px solid #e7ded3}
-summary{list-style:none;display:grid;grid-template-columns:25px 1fr 20px;align-items:center;gap:8px;padding:10px 0;min-height:44px;font-size:.93rem;font-weight:600;cursor:pointer}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";font-family:var(--mono);color:var(--slate);text-align:right}
-details[open] summary::after{content:"−"}
-details .role-index{color:var(--slate);font:400 11px var(--mono)}
-details p{padding:0 22px 12px 33px;color:var(--slate);font-size:.87rem}
-.roles-note{margin-top:14px;color:var(--slate);font-size:.88rem}
+.calc-table tfoot td{font-weight:650;border:0}
+.markup{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-bottom:8px}
+.task-list{list-style:none;margin:0;padding:0}
+.task-list li{display:flex;gap:8px;align-items:center;padding:9px 2px;border-bottom:1px solid #e8e8e8}
+.task-list input{width:18px;height:18px;accent-color:#222;flex:none}
+.task-list label{flex:1;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.task-list input:checked+label .task-name{color:#555;text-decoration:line-through}
+.notice{padding:10px 12px;border-radius:12px;background:#edf4ef;color:#294639;margin-top:10px;font-size:.88rem}
+.task-counter{font-size:.8rem;color:#505050;margin-top:7px}
+#agents{padding-top:28px}
+.flow-callout{margin-bottom:16px;display:flex;align-items:center;gap:10px;color:#4c4c4c;font-size:.91rem}
+.flow-callout .spark{color:#875333;font-size:23px;line-height:1;flex:none}
+.flow-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(225px,27%);gap:18px;align-items:start}
+.flow-graph{position:relative;isolation:isolate;background:var(--white);border:1px solid var(--line);border-radius:20px;padding:20px 22px 22px;display:grid;gap:25px}
+.flow-edges{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:-1;overflow:visible}
+.flow-edge{fill:none;stroke:#b5a391;stroke-width:1.5}
+.flow-edge.return{stroke:#947db6;stroke-dasharray:4 4}
+.flow-edge.focus-edge{stroke:#754126;stroke-width:2.25}
+.flow-edge.return.focus-edge{stroke:#71528e}
+.flow-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.flow-node{min-height:58px;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px;line-height:1.15;padding:7px 6px;border:1px solid #d8cec0;border-radius:12px;background:var(--white);color:var(--midnight);font-size:.84rem;font-weight:650}
+.flow-node:hover,.flow-node[aria-pressed=true]{background:#f0dfd0;border-color:#a97b61}
+.flow-node small{font-size:.63rem;color:#5c5763;font-weight:500}
+.flow-node.human{background:#efe9f9;border-color:#d4c6eb}
+.flow-node.human:hover,.flow-node.human[aria-pressed=true]{background:#e7d9f7;border-color:#9d86bd}
+.flow-node.service{background:#e9f0ea;border-color:#bdd0c3}
+.flow-node.service:hover,.flow-node.service[aria-pressed=true]{background:#dcece0;border-color:#7c9988}
+.flow-panel{position:sticky;top:16px;padding:17px 15px;background:var(--white);border:1px solid var(--line);border-radius:16px;overflow-wrap:anywhere}
+.flow-panel .eyebrow{font-size:.64rem;color:var(--slate);margin-bottom:5px}
+.flow-panel h3{font-size:1.35rem}
+.flow-panel p{font-size:.85rem;color:var(--slate);margin-top:7px}
+.flow-transfers{list-style:none;padding:0;margin:10px 0 0}
+.flow-transfers li+li{margin-top:8px}
+.flow-transfers button{background:transparent;border:0;padding:0;text-align:left;font-size:.79rem;color:#523a30;line-height:1.35;text-decoration:underline;text-underline-offset:2px}
+.flow-transfers button:hover{color:#875333}
+.flow-legend{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:12px;color:var(--slate);font-size:.8rem}
+.flow-legend .dash{color:#735993;font-weight:600}
+.flow-mobile{display:none}
+@media(max-width:930px){
+ .workbench{grid-template-columns:178px minmax(0,1fr)}.gpt-top{padding-inline:15px}.thread{padding-inline:19px}.flow-graph{padding-inline:17px}.flow-node{font-size:.78rem}
+}
+@media(max-width:680px){
+ .workbench{display:block;min-height:0;border-radius:17px}.gpt-sidebar{padding:8px;border:0;border-bottom:1px solid #e8e8e8}.gpt-brand,.sidebar-account,.sidebar-label{display:none}.project-nav{display:flex}.project-nav button{flex:1;justify-content:center;gap:5px;font-size:.83rem;padding:5px}.gpt-top{min-height:48px;padding:8px 11px}.gpt-top .gpt-tag{font-size:10px}.thread{padding:17px 12px}.user-turn{max-width:95%;font-size:.85rem}.assistant-line{gap:7px}.composer{padding-left:9px;gap:5px}.composer-text{font-size:.72rem}.chat-action{padding-inline:8px;font-size:.74rem}.reel-track span{font-size:.61rem}.calc-table{font-size:.73rem}.calc-table th,.calc-table td{padding:6px 3px}.calc-table input,.marked-input{width:48px}.task-list label{align-items:start;flex-direction:column;gap:3px}
+ .flow-layout{display:block}.flow-graph{gap:14px;padding:13px 9px}.flow-edges{display:none}.flow-row{gap:5px}.flow-node{min-height:62px;font-size:.71rem;padding:5px 4px;overflow-wrap:anywhere}.flow-node small{font-size:.58rem}
+ .flow-row+.flow-row::before{content:"↓";grid-column:1/-1;text-align:center;height:13px;line-height:12px;color:#855d45}
+ .flow-panel{position:static;margin:0 0 11px}.flow-panel p{font-size:.83rem}.flow-legend .desktop{display:none}.flow-mobile{display:inline}
+}
 .closing{position:relative;padding:58px 0 36px;overflow:hidden;background:var(--dusk)}
 .closing .wrap{position:relative;z-index:1}
 .closing h2{font-size:clamp(2.8rem,5vw,4.7rem);font-weight:300;letter-spacing:-.04em}
@@ -151,19 +186,12 @@ details p{padding:0 22px 12px 33px;color:var(--slate);font-size:.87rem}
 .start-grid p{margin-top:5px;font-size:.91rem;color:var(--soft)}
 footer{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid #ede7dc32;padding-top:18px}
 footer p{color:var(--mist);font-size:.8rem;text-align:right}
-@media(max-width:900px){
- .wrap{width:calc(100% - 56px)}.hero .wrap{min-height:420px}.workbench{grid-template-columns:180px minmax(0,1fr)}.work-pane{padding:24px 22px}.scene{grid-template-columns:minmax(0,1fr) 133px;gap:13px}.frame{min-height:215px}
-}
+@media(max-width:900px){.wrap{width:calc(100% - 56px)}.hero .wrap{min-height:420px}}
 @media(max-width:680px){
  .wrap{width:calc(100% - 32px)}header .wrap{min-height:60px}header nav{gap:14px;font-size:.78rem}header nav a:first-child{display:none}.brand small{display:none}
  .hero .wrap{grid-template-columns:1fr;gap:0;padding-block:40px 22px}.hero h1{font-size:clamp(2.75rem,10vw,4.7rem);margin:12px 0 14px}.hero .lead{font-size:1rem}.hero-actions{margin-top:20px}.space-art{min-height:190px;width:min(360px,100%);margin:auto}.planet{width:34%}
  section.paper{padding:43px 0}.section-heading{grid-template-columns:1fr;gap:8px;margin-bottom:17px}.section-heading h2{font-size:clamp(2.3rem,9vw,3rem)}
- .workbench{display:block;min-height:0;border-radius:21px}.rail{padding:13px;gap:8px}.rail-head,.rail-foot{display:none}.project-nav{display:flex}.project-nav button{flex:1;justify-content:center;font-size:.83rem;padding:6px 5px;gap:5px}.project-nav .index{font-size:9px}
- .work-pane{padding:18px 14px}.pane-top h3{font-size:30px}.pane-top{gap:8px}.pane-top .chip{font-size:.66rem}.scene{grid-template-columns:minmax(0,1fr) 105px;gap:10px;min-height:0}.frame{min-height:174px;align-self:start}.scene h4{font-size:.96rem}.scene p,.bundle{font-size:.81rem}.bundle{padding:9px 10px}.bundle p{font-size:.8rem}.pipeline span{font-size:.62rem}.work-actions{gap:5px}.work-actions .button{font-size:.77rem;padding-inline:11px}.work-actions .restart{margin-left:0}
- .agent-groups,.start-grid{grid-template-columns:1fr}.agent-group{padding:14px 15px}.start-grid{gap:11px}.closing{padding:39px 0 27px}.estimate{font-size:.75rem}.estimate th,.estimate td{padding:9px 4px}.estimate input{width:49px}
-}
-@media(max-width:370px){
- .scene{grid-template-columns:1fr}.frame{display:none}.hero-note{max-width:21ch}.pipeline span{font-size:.58rem}.task-list label{align-items:start;flex-direction:column}
+ .start-grid{grid-template-columns:1fr;gap:11px}.closing{padding:39px 0 27px}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
 </style>
@@ -172,7 +200,7 @@ footer p{color:var(--mist);font-size:.8rem;text-align:right}
 <header class="night" id="top">
   <div class="wrap">
     <a href="#top" class="brand" aria-label="NV · Claude, начало страницы"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 2c1.4 6.6 4.4 9.6 14 14-9.6 4.4-12.6 7.4-14 14-1.4-6.6-4.4-9.6-14-14 9.6-4.4 12.6-7.4 14-14z"/></svg>NV<small>CLAUDE</small></a>
-    <nav aria-label="Разделы демо"><a href="#demo">Пространство</a><a href="#agents">13 агентов</a><a href="#start">Начало работы</a></nav>
+    <nav aria-label="Разделы демо"><a href="#demo">Пространство</a><a href="#agents">Схема агентов</a><a href="#start">Начало работы</a></nav>
   </div>
 </header>
 <main>
@@ -193,71 +221,118 @@ footer p{color:var(--mist);font-size:.8rem;text-align:right}
   <section class="paper wrap" id="demo" aria-labelledby="demo-title">
     <div class="section-heading">
       <div><p class="eyebrow">Ваше пространство в ChatGPT</p><h2 id="demo-title">Три <em>проекта.</em></h2></div>
-      <p>Для Вас и дизайнера предусмотрены отдельные рабочие места в ChatGPT Business. «Контент» — общий проект. Доступ к сметам и задачам определим с Вами.</p>
+      <p>У Вас и дизайнера будут отдельные входы в ChatGPT Business. «Контент» — общий проект. Доступ к сметам и задачам настроим по Вашим ролям.</p>
     </div>
+    <svg width="0" height="0" aria-hidden="true" style="position:absolute;overflow:hidden">
+      <symbol id="icon-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+      <symbol id="icon-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M10 4v16M4 10h16"/></symbol>
+    </svg>
     <div class="workbench">
-      <aside class="rail night">
-        <div class="rail-head"><p class="eyebrow">Рабочее пространство</p><p class="rail-name">Бюро Деи</p></div>
+      <aside class="gpt-sidebar">
+        <div class="gpt-brand"><svg class="gpt-icon" aria-hidden="true"><use href="#icon-grid"/></svg><div><p class="gpt-name">ChatGPT</p><small>Рабочее пространство Business</small></div></div>
         <nav class="project-nav" aria-label="Проекты">
-          <button type="button" data-project="estimate" aria-pressed="false" aria-controls="estimate"><span class="index">01</span><span class="nav-label">Сметы</span></button>
-          <button type="button" data-project="content" aria-pressed="true" aria-controls="content"><span class="index">02</span><span class="nav-label">Контент</span></button>
-          <button type="button" data-project="tasks" aria-pressed="false" aria-controls="tasks"><span class="index">03</span><span class="nav-label">Задачи</span></button>
+          <p class="sidebar-label">Проекты</p>
+          <button type="button" data-project="estimate" aria-pressed="false" aria-controls="estimate"><svg class="gpt-icon" aria-hidden="true"><use href="#icon-folder"/></svg>Сметы</button>
+          <button type="button" data-project="content" aria-pressed="true" aria-controls="content"><svg class="gpt-icon" aria-hidden="true"><use href="#icon-folder"/></svg>Контент</button>
+          <button type="button" data-project="tasks" aria-pressed="false" aria-controls="tasks"><svg class="gpt-icon" aria-hidden="true"><use href="#icon-folder"/></svg>Задачи</button>
         </nav>
-        <div class="rail-foot"><strong>Иллюстрация интерфейса</strong>Действия в демо показаны на примерах.</div>
+        <div class="sidebar-account"><span class="avatar" aria-hidden="true">Д</span><div><strong>Дея</strong><small>Бюро Деи · Business</small></div></div>
       </aside>
 
       <div class="work-pane">
-        <section class="project" id="content" aria-labelledby="content-title">
-          <div class="pane-top"><div><p class="eyebrow">Один ролик · от исходников до выхода</p><h3 id="content-title">Контент</h3></div><span class="chip warm" id="reel-version">Карточка ролика</span></div>
-          <div class="pipeline" aria-label="Этапы ролика">
-            <span aria-current="step" class="active">Материалы</span><span>Проект Reels</span><span>Монтаж</span><span>Согласование</span><span>Metricool</span>
-          </div>
-          <div class="scene">
-            <div id="scene-copy" aria-live="polite">
-              <h4 id="stage-title">Вы даёте материал и замысел</h4>
-              <p id="stage-desc">Продюсер заводит карточку ролика. Дизайнер может добавить фото и эффекты оформления в этот же проект.</p>
-              <div class="bundle"><p class="eyebrow" id="bundle-label">Ваша заявка</p><p id="bundle-copy">«Покажите, как мы добавили свет в прихожей. В папке есть кадры до и после. Хочу спокойный ролик с титрами».</p></div>
+        <div class="gpt-top"><div class="gpt-crumb"><svg class="gpt-icon" aria-hidden="true"><use href="#icon-folder"/></svg><span id="project-crumb">Контент</span></div><span class="gpt-tag">Иллюстрация интерфейса</span></div>
+        <section class="project thread" id="content" aria-labelledby="content-title">
+          <h3 class="thread-title" id="content-title">Ролик «Свет в прихожей»</h3>
+          <p class="thread-intro">Оставьте идею и файлы в чате проекта. Продюсер ведёт работу, дизайнер добавляет материалы, а Вы получаете ролик, обложку и подпись одним комплектом.</p>
+          <div class="user-turn"><span class="gpt-tag">Фото и видео объекта</span><p>Собери ролик о том, как мы добавили свет в прихожей. В папке есть кадры до и после. Хочу спокойный темп и титры.</p></div>
+          <div class="assistant-line">
+            <span class="assistant-avatar" aria-hidden="true">✧</span>
+            <div class="assistant-body" aria-live="polite">
+              <p class="assistant-label" id="current-agent">Продюсер</p>
+              <strong id="stage-title">Идея и исходники в одной карточке</strong>
+              <p id="stage-desc">Соберу карточку и передам материалы тем, кто подготовит структуру и монтаж.</p>
+              <div class="reel-track" aria-label="Этапы ролика"><span class="active" aria-current="step">Идея</span><span>Структура</span><span>Монтаж</span><span>Согласование</span><span>Metricool</span></div>
+              <div class="result-card"><strong id="bundle-label">В карточке</strong><p id="bundle-copy">Замысел, папка с кадрами до и после, пожелания к темпу и титрам.</p></div>
             </div>
-            <div class="frame" id="frame" data-stage="0" aria-label="Условный кадр из ролика">
-              <div class="frame-visual" aria-hidden="true"><div class="room"></div></div>
-              <span class="frame-name mono" id="frame-name">ИСХОДНИКИ</span><span class="frame-label" id="frame-label">Свет в прихожей</span>
-            </div>
           </div>
-          <div class="work-actions">
-            <button class="button" type="button" id="next-stage">Запустить демо <span aria-hidden="true">→</span></button>
-            <button class="button ghost" type="button" id="reel-revision" hidden>Попросить правку</button>
-            <button class="button ghost restart" type="button" id="reel-restart" hidden>Начать заново</button>
+          <div class="composer">
+            <span class="composer-text" id="composer-hint">Вы отправляете одну заявку</span>
+            <button class="chat-action" type="button" id="next-stage">Пройти пример →</button>
           </div>
-          <p class="footnote">Демо показывает порядок работы на примере одного Reels.</p>
+          <div class="thread-controls">
+            <button class="chat-action secondary" type="button" id="reel-revision" hidden>Попросить правку</button>
+            <button class="chat-action secondary" type="button" id="reel-restart" hidden>Начать заново</button>
+            <a class="chat-action secondary" href="#agents">Открыть схему агентов ↓</a>
+          </div>
+          <details class="pane-details"><summary> Что входит в проект «Контент»</summary>
+            <p>В проекте хранятся правила подачи бюро, архив съёмок и карточки роликов с версиями. Агенты помогают искать идеи, планировать контент, готовить монтаж, обложки и тексты. Instagram подключаем через Metricool. Для Telegram и YouTube можно готовить отдельные версии материала.</p>
+          </details>
         </section>
 
-        <section class="project" id="estimate" aria-labelledby="estimate-title" hidden>
-          <div class="pane-top"><div><p class="eyebrow">Расчёт по Вашему шаблону</p><h3 id="estimate-title">Сметы</h3></div><span class="chip warm">Черновик</span></div>
-          <p class="test-description">Измените объёмы. Суммы пересчитаются по условным расценкам. В рабочем проекте будут Ваши шаблон и справочник.</p>
-          <table class="estimate">
-            <thead><tr><th scope="col">Работы</th><th scope="col">Объём</th><th scope="col">За м²</th><th scope="col">Сумма</th></tr></thead>
-            <tbody>
-              <tr data-rate="480"><th scope="row">Грунтовка</th><td><input type="number" value="18" min="0" max="10000" step="any" inputmode="decimal" aria-label="Объём грунтовки, м²"></td><td class="money">480 ₽</td><td class="money row-total">8 640 ₽</td></tr>
-              <tr data-rate="1050"><th scope="row">Окраска</th><td><input type="number" value="18" min="0" max="10000" step="any" inputmode="decimal" aria-label="Объём окраски, м²"></td><td class="money">1 050 ₽</td><td class="money row-total">18 900 ₽</td></tr>
-              <tr data-rate="1550"><th scope="row">Укладка плитки</th><td><input type="number" value="7" min="0" max="10000" step="any" inputmode="decimal" aria-label="Объём укладки плитки, м²"></td><td class="money">1 550 ₽</td><td class="money row-total">10 850 ₽</td></tr>
-            </tbody>
-            <tfoot><tr><td colspan="3">Итого по заполненным строкам</td><td class="money"><output id="estimate-total">38 390 ₽</output></td></tr></tfoot>
-          </table>
-          <div class="bundle"><p class="eyebrow">Перед отправкой</p><p>Вы проверяете позиции, расценки и итог. Позиции без данных отмечаются в черновике.</p></div>
-          <p class="footnote" id="estimate-status" aria-live="polite"></p>
+        <section class="project thread" id="estimate" aria-labelledby="estimate-title" hidden>
+          <h3 class="thread-title" id="estimate-title">Сметы и документы по объектам</h3>
+          <p class="thread-intro">В проекте будут Ваш шаблон сметы, расценки, правила наценки и реквизиты бюро. Вы даёте объёмы или документ поставщика. Помощник собирает расчёт и отмечает, что нужно проверить.</p>
+          <div class="chats" role="group" aria-label="Примеры работы со сметами"><button type="button" data-chat="estimate-volume" aria-pressed="true" aria-controls="estimate-volume">Смета по объёмам</button><button type="button" data-chat="estimate-supplier" aria-pressed="false" aria-controls="estimate-supplier">Документ поставщика</button></div>
+          <div id="estimate-volume">
+            <div class="user-turn">Подготовь смету по ремонту прихожей. Возьми расценки из справочника, объёмы указаны ниже.</div>
+            <div class="assistant-line"><span class="assistant-avatar" aria-hidden="true">✧</span><div class="assistant-body"><p class="assistant-label">Сметы</p><p>Собрала черновик по трём работам. Измените объём в примере, чтобы увидеть новый итог.</p>
+              <table class="calc-table estimate">
+                <thead><tr><th scope="col">Работа</th><th scope="col">м²</th><th scope="col">За м²</th><th scope="col">Сумма</th></tr></thead>
+                <tbody>
+                  <tr data-rate="480"><th scope="row">Грунтовка</th><td><input type="number" value="18" min="0" max="10000" step="any" inputmode="decimal" aria-label="Объём грунтовки, м²"></td><td class="money">480 ₽</td><td class="money row-total">8 640 ₽</td></tr>
+                  <tr data-rate="1050"><th scope="row">Окраска</th><td><input type="number" value="18" min="0" max="10000" step="any" inputmode="decimal" aria-label="Объём окраски, м²"></td><td class="money">1 050 ₽</td><td class="money row-total">18 900 ₽</td></tr>
+                  <tr data-rate="1550"><th scope="row">Укладка плитки</th><td><input type="number" value="7" min="0" max="10000" step="any" inputmode="decimal" aria-label="Объём укладки плитки, м²"></td><td class="money">1 550 ₽</td><td class="money row-total">10 850 ₽</td></tr>
+                </tbody>
+                <tfoot><tr><td colspan="3">Итого</td><td class="money"><output id="estimate-total">38 390 ₽</output></td></tr></tfoot>
+              </table>
+              <p class="micro" id="estimate-status" aria-live="polite">Условные расценки</p>
+            </div></div>
+          </div>
+          <div id="estimate-supplier" hidden>
+            <div class="user-turn"><span class="gpt-tag">Счёт поставщика · пример</span><p>Возьми из счёта позиции и количество. Добавь согласованную наценку и подготовь наше предложение заказчику.</p></div>
+            <div class="assistant-line"><span class="assistant-avatar" aria-hidden="true">✧</span><div class="assistant-body"><p class="assistant-label">Сметы</p><p>Взяла закупочные цены из исходника. Рассчитала новые суммы и подготовила черновик по шаблону бюро.</p>
+              <div class="result-card">
+                <label class="markup" for="markup-value">Наценка на позиции <input class="marked-input" type="number" id="markup-value" value="15" min="0" max="100" step="any" inputmode="decimal"> %</label>
+                <p>Светильники · 4 шт. × 2 400 ₽ = 9 600 ₽</p><p>Расходные материалы · 1 комплект × 2 400 ₽ = 2 400 ₽</p><p>Всего у поставщика · 12 000 ₽</p>
+                <p><b>Итого в нашем предложении · <output id="supplier-total">13 800 ₽</output></b></p>
+              </div><p class="micro">Условный расчёт. Дея проверяет позиции, наценку, реквизиты и суммы перед отправкой.</p>
+            </div></div>
+          </div>
+          <details class="pane-details"><summary>Какие материалы и документы можно использовать</summary>
+            <p>Загрузите свой шаблон, готовую смету для сверки и расценки. Для разбора поставок можно приложить счёт, накладную или УПД. Помощник извлечёт позиции, количество и цены, сохранит связь с источником и отметит расхождения.</p>
+            <p>На базе проверенных данных можно собрать черновик собственного предложения, счёта или договора по Вашему согласованному шаблону. Поставщик остаётся указан в исходном документе. Форматы выгрузки согласуем по тому, как Вы сейчас ведёте сметы.</p>
+          </details>
         </section>
 
-        <section class="project" id="tasks" aria-labelledby="tasks-title" hidden>
-          <div class="pane-top"><div><p class="eyebrow">Реестр поручений по объектам</p><h3 id="tasks-title">Задачи</h3></div><span id="task-count" class="chip warm" aria-live="polite">Открыто 3</span></div>
-          <p class="test-description">После встречи продиктуйте договорённости. Помощник предложит задачи, ответственных и сроки. Попробуйте отметить выполненное.</p>
-          <ul class="task-list">
-            <li><input type="checkbox" id="task-light"><label for="task-light"><span class="task-name">Уточнить схему освещения</span><span class="chip">Дизайнер · сегодня</span></label></li>
-            <li><input type="checkbox" id="task-estimate"><label for="task-estimate"><span class="task-name">Сверить объёмы по смете</span><span class="chip">Дея · завтра</span></label></li>
-            <li><input type="checkbox" id="task-reel"><label for="task-reel"><span class="task-name">Посмотреть новую версию ролика</span><span class="chip">Дея · завтра</span></label></li>
-          </ul>
-          <div class="work-actions"><button type="button" class="button" id="show-reminder" aria-controls="reminder" aria-expanded="false">Показать напоминание</button></div>
-          <p class="notice" id="reminder" role="status" hidden>Пример напоминания · Сегодня, 17:00. Уточните схему освещения по объекту.</p>
-          <p class="footnote">После подключения почты помощник сможет предлагать поручения из важных писем на Вашу проверку.</p>
+        <section class="project thread" id="tasks" aria-labelledby="tasks-title" hidden>
+          <h3 class="thread-title" id="tasks-title">Поручения, сроки и напоминания</h3>
+          <p class="thread-intro">Передайте заметки со встречи или продиктуйте договорённости. Помощник предложит поручения по объектам, укажет сроки и ответственных, а спорные детали вынесет на уточнение.</p>
+          <div class="chats" role="group" aria-label="Примеры работы с задачами"><button type="button" data-chat="tasks-list" aria-pressed="true" aria-controls="tasks-list">Реестр задач</button><button type="button" data-chat="tasks-mail" aria-pressed="false" aria-controls="tasks-mail">Письмо → поручение</button></div>
+          <div id="tasks-list">
+            <div class="user-turn">Что нужно сделать по прихожей сегодня и что на завтра? Напомни дизайнеру про его задачу в 17:00.</div>
+            <div class="assistant-line"><span class="assistant-avatar" aria-hidden="true">✧</span><div class="assistant-body"><p class="assistant-label">Задачи</p><p>Вот открытые поручения. Отметьте выполненное или посмотрите пример напоминания.</p>
+              <ul class="task-list">
+                <li><input type="checkbox" id="task-light"><label for="task-light"><span class="task-name">Уточнить схему освещения</span><span class="gpt-tag">Дизайнер · сегодня</span></label></li>
+                <li><input type="checkbox" id="task-estimate"><label for="task-estimate"><span class="task-name">Сверить объёмы сметы</span><span class="gpt-tag">Дея · завтра</span></label></li>
+                <li><input type="checkbox" id="task-reel"><label for="task-reel"><span class="task-name">Посмотреть версию ролика</span><span class="gpt-tag">Дея · завтра</span></label></li>
+                <li id="mail-task-row" hidden><input type="checkbox" id="task-mail-sample"><label for="task-mail-sample"><span class="task-name">Подтвердить дату поставки</span><span class="gpt-tag">Дея · сегодня</span></label></li>
+              </ul>
+              <p class="task-counter" id="task-count" aria-live="polite">Открыто 3</p>
+              <div class="thread-controls"><button type="button" class="chat-action secondary" id="show-reminder" aria-controls="reminder" aria-expanded="false">Показать напоминание</button></div>
+              <p class="notice" id="reminder" role="status" hidden>Пример уведомления · Сегодня, 17:00. Уточните схему освещения по объекту.</p>
+            </div></div>
+          </div>
+          <div id="tasks-mail" hidden>
+            <div class="user-turn">Покажи письма, где от меня ждут ответа или решения.</div>
+            <div class="assistant-line"><span class="assistant-avatar" aria-hidden="true">✧</span><div class="assistant-body"><p class="assistant-label">Почтовый помощник</p><p>В примере нашла письмо поставщика. Он просит подтвердить дату поставки до конца дня.</p>
+              <div class="result-card"><strong>Предложение для реестра</strong><p>Подтвердить дату поставки · Дея · сегодня. В рабочей версии к поручению прикрепляется ссылка на письмо, если она доступна.</p></div>
+              <div class="thread-controls"><button class="chat-action" type="button" id="accept-mail-task">Добавить в реестр</button><span class="micro" id="mail-status" role="status"></span></div>
+            </div></div>
+          </div>
+          <details class="pane-details"><summary>Как помощник ведёт задачи</summary>
+            <p>По запросу «Что сегодня?» выводит просроченное и ближайшие сроки. При переносе обновляет ту же задачу. Напоминания настраиваем на согласованное время и проверяем доставку.</p>
+            <p>После подключения рабочей почты можно включить сводку важных писем и предложения поручений. Согласуем, какие письма учитывать, кому видны задачи и кто подтверждает ответы.</p>
+          </details>
         </section>
       </div>
     </div>
@@ -265,35 +340,26 @@ footer p{color:var(--mist);font-size:.8rem;text-align:right}
 
   <section class="paper wrap" id="agents" aria-labelledby="agents-title">
     <div class="section-heading">
-      <div><p class="eyebrow">Контент-завод</p><h2 id="agents-title">13 <em>агентов.</em></h2></div>
-      <p>Вы ставите задачу продюсеру. Он передаёт её нужным специалистам. Откройте роль, чтобы увидеть, что она готовит.</p>
+      <div><p class="eyebrow">Контент-завод · 13 агентов</p><h2 id="agents-title">От идеи <em>до публикации.</em></h2></div>
+      <p>Вы даёте идею продюсеру. После настройки агенты будут сами передавать задания и результаты через общую карточку ролика. Вы смотрите готовый комплект и решаете, выпускать ли его.</p>
     </div>
-    <div class="agent-groups">
-      <article class="agent-group"><h3>План и материалы</h3>
-        <details><summary><span class="role-index">01</span>Продюсер</summary><p>Разбирает Вашу заявку, ведёт карточку ролика, передаёт работу и собирает итоговый комплект на согласование.</p></details>
-        <details><summary><span class="role-index">02</span>Исследователь идей</summary><p>Изучает открытые референсы и предлагает идеи, которые можно показать на материалах Вашего бюро.</p></details>
-        <details><summary><span class="role-index">03</span>Редактор контент-плана</summary><p>Выбирает рубрики, темы и даты с учётом готовых материалов и результатов прошлых роликов.</p></details>
-        <details><summary><span class="role-index">04</span>Медиабиблиотекарь</summary><p>Разбирает фото и видео, находит подходящие фрагменты и отмечает, где нужна досъёмка или проверка.</p></details>
-      </article>
-      <article class="agent-group"><h3>Сценарий и съёмка</h3>
-        <details open><summary><span class="role-index">05</span>Проектировщик Reels</summary><p>Переводит Вашу идею в структуру ролика. Выбирает первые секунды, порядок кадров и то, чем подтвердить главную мысль.</p></details>
-        <details><summary><span class="role-index">06</span>Сценарист</summary><p>Пишет реплики и закадровый текст. Готовит список коротких фрагментов, которые пригодится доснять.</p></details>
-      </article>
-      <article class="agent-group"><h3>Сборка ролика</h3>
-        <details open><summary><span class="role-index">07</span>Монтажёр</summary><p>Собирает исходники через инструмент монтажа, отдаёт видеофайл MP4 и выпускает новую версию по Вашим правкам.</p></details>
-        <details><summary><span class="role-index">08</span>Редактор титров и звука</summary><p>Сверяет субтитры с речью, проверяет слышимость голоса и синхрон. Передаёт точные правки монтажёру.</p></details>
-        <details><summary><span class="role-index">09</span>Дизайнер обложек</summary><p>Подбирает кадр, заголовок и компоновку. Дизайнер бюро может уточнить оформление перед выпуском.</p></details>
-        <details><summary><span class="role-index">10</span>Копирайтер</summary><p>Готовит подпись к ролику и при необходимости адаптирует текст для Telegram и YouTube.</p></details>
-      </article>
-      <article class="agent-group"><h3>Выпуск и результаты</h3>
-        <details><summary><span class="role-index">11</span>Контроль качества</summary><p>Проверяет факты, звук, титры, обложку и соответствие Вашему замыслу. Отправляет замечания нужному исполнителю.</p></details>
-        <details open><summary><span class="role-index">12</span>Публикатор Instagram</summary><p>Передаёт утверждённый Reel в Metricool, сверяет аккаунт, дату и вложение. После наступления срока проверяет выход.</p></details>
-        <details><summary><span class="role-index">13</span>Аналитик</summary><p>Смотрит доступные просмотры, сохранения и другие метрики. Предлагает один понятный тест для следующего ролика.</p></details>
-      </article>
+    <p class="flow-callout"><span class="spark" aria-hidden="true">✦</span>Нажмите на роль и посмотрите, от кого она получает работу и кому передаёт результат.</p>
+    <div class="flow-layout">
+      <div class="flow-graph" id="flow-graph" aria-label="Схема передачи работы между агентами">
+        <svg class="flow-edges" id="flow-edges" aria-hidden="true"><defs>
+          <marker id="flow-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="#9b806b"/></marker>
+          <marker id="return-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="#947db6"/></marker>
+        </defs></svg>
+      </div>
+      <aside class="flow-panel" id="flow-panel" aria-live="polite">
+        <p class="eyebrow" id="flow-type">Вы</p>
+        <h3 id="flow-title">Идея и исходники</h3>
+        <p id="flow-summary">Вы описываете, какой ролик хотите, и прикладываете материалы.</p>
+        <ul class="flow-transfers" id="flow-transfers"></ul>
+      </aside>
     </div>
-    <p class="roles-note">Видео, обложка и подпись собираются в одной карточке. Вы видите актуальную версию и утверждаете комплект перед публикацией.</p>
+    <p class="flow-legend"><span class="desktop">Сплошная стрелка · передача материалов</span><span class="dash desktop">Пунктир · правки и обратная связь</span><span class="flow-mobile">В карточке видны входящие и исходящие связи, включая правки.</span></p>
   </section>
-
   <section class="closing night" id="start" aria-labelledby="start-title">
     <div class="wrap">
       <p class="eyebrow">Начало работы</p><h2 id="start-title">Начнём <em>с одного объекта.</em></h2>
@@ -308,72 +374,45 @@ footer p{color:var(--mist);font-size:.8rem;text-align:right}
 </main>
 <script>
 const byId = id => document.getElementById(id);
-const projectButtons = [...document.querySelectorAll('[data-project]')];
-projectButtons.forEach(button => button.addEventListener('click', () => {
-  projectButtons.forEach(peer => {
-    const selected = peer === button;
-    peer.setAttribute('aria-pressed', String(selected));
-    byId(peer.dataset.project).hidden = !selected;
-  });
-}));
+function wirePanels(attribute, onSelect = () => {}) {
+  for (const button of document.querySelectorAll('[' + attribute + ']')) {
+    button.addEventListener('click', () => {
+      const group = button.parentElement.querySelectorAll('[' + attribute + ']');
+      group.forEach(peer => {
+        const selected = peer === button;
+        peer.setAttribute('aria-pressed', String(selected));
+        byId(peer.getAttribute(attribute)).hidden = !selected;
+      });
+      onSelect(button);
+    });
+  }
+}
+wirePanels('data-project', button => { byId('project-crumb').textContent = button.textContent.trim(); });
+wirePanels('data-chat');
 
 const stages = [
-  {
-    title: 'Вы даёте материал и замысел',
-    description: 'Продюсер заводит карточку ролика. Дизайнер может добавить фото и референсы в этот же проект.',
-    label: 'Ваша заявка',
-    sample: '«Покажите, как мы добавили свет в прихожей. В папке есть кадры до и после. Хочу спокойный ролик с титрами».',
-    action: 'Запустить демо', frame: 'ИСХОДНИКИ', status: 'Карточка ролика'
-  },
-  {
-    title: 'Проектировщик собирает структуру Reels',
-    description: 'Медиабиблиотекарь находит кадры. Проектировщик выбирает первые секунды и порядок показа. Сценарист пишет короткие реплики.',
-    label: 'Фрагмент монтажного плана',
-    sample: '0–3 с · прихожая до ремонта. 3–12 с · как меняется свет. Финал · тот же ракурс после ремонта.',
-    action: 'Передать монтажёру', frame: 'ПЛАН КАДРОВ', status: 'Структура готова'
-  },
-  {
-    title: 'Монтажёр собирает видео',
-    description: 'Монтажёр обрезает фрагменты и собирает ролик. Редактор проверяет титры и звук. Обложка и подпись готовятся параллельно.',
-    label: 'Что готовит команда',
-    sample: 'Вертикальный MP4, обложка «Как мы добавили свет» и подпись о решении для прихожей.',
-    action: 'Открыть согласование', frame: 'ЧЕРНОВИК MP4', status: 'Версия 1'
-  },
-  {
-    title: 'Вы смотрите и даёте правку',
-    description: 'Продюсер приносит видео, обложку и подпись одним комплектом. После проверки Вы можете вернуть конкретный фрагмент на правку.',
-    label: 'Комплект на согласование',
-    sample: 'Ролик «Свет в прихожей», обложка и подпись для Instagram. Предлагаемый слот — пятница, 18:30 МСК.',
-    action: 'Утвердить в демо', frame: 'НА СОГЛАСОВАНИИ', status: 'Версия 1'
-  },
-  {
-    title: 'Ролик попадает в календарь Metricool',
-    description: 'Публикатор ставит утверждённый комплект в календарь Instagram и сверяет вложение. После выхода аналитик посмотрит доступные метрики.',
-    label: 'Пример записи Metricool',
-    sample: 'Instagram Reels · «Свет в прихожей» · пятница, 18:30 МСК · запланировано в демо.',
-    action: '', frame: 'В КАЛЕНДАРЕ', status: 'Утверждено'
-  }
+  ['Продюсер', 'Идея и исходники в одной карточке', 'Соберу карточку и передам материалы тем, кто подготовит структуру и монтаж.', 'В карточке', 'Замысел, папка с кадрами до и после, пожелания к темпу и титрам.', 'Пройти пример', 'Вы отправляете одну заявку'],
+  ['Проектировщик Reels', 'Структура ролика готова', 'Я получил карту материалов от медиабиблиотекаря. Передаю сценаристу порядок кадров и то, что нужно сказать.', 'Фрагмент плана', '0–3 с · прихожая до ремонта. 3–12 с · решение со светом. Финал · тот же ракурс после ремонта.', 'Посмотреть сборку', 'Агенты обмениваются результатами через карточку'],
+  ['Монтажёр', 'Собираю первую версию', 'Получил план и сценарий. Передаю черновик редактору титров и звука. В это же время дизайнер обложек и копирайтер готовят материалы для выпуска.', 'Комплект в работе', 'Вертикальный MP4, обложка «Как мы добавили свет» и подпись для Instagram.', 'Открыть согласование', 'Обложка и подпись готовятся параллельно'],
+  ['Продюсер', 'Комплект на Ваше согласование', 'Контроль качества проверил ролик, факты, звук, титры и подпись. Посмотрите комплект и решите, готов ли он к выходу.', 'Версия 1', 'Ролик «Свет в прихожей», обложка и подпись. Предлагаемый слот — пятница, 18:30 МСК.', 'Утвердить в демо', 'Вы можете вернуть комплект на правку'],
+  ['Публикатор Instagram', 'Утверждённый ролик в календаре Metricool', 'Публикатор сверяет аккаунт, вложение и время. После выхода аналитик передаст результаты редактору контент-плана.', 'Пример записи Metricool', 'Instagram Reels · «Свет в прихожей» · пятница, 18:30 МСК · запланировано в демо.', '', 'Следующий шаг после выхода — собрать метрики']
 ];
+let stage = 0;
+let revised = false;
 const nextStage = byId('next-stage');
 const revise = byId('reel-revision');
 const restart = byId('reel-restart');
-const progress = [...document.querySelectorAll('.pipeline span')];
-let stage = 0;
-let revised = false;
+const progress = [...document.querySelectorAll('.reel-track span')];
 function showStage() {
-  const current = stages[stage];
-  byId('stage-title').textContent = current.title;
-  byId('stage-desc').textContent = current.description;
-  byId('bundle-label').textContent = current.label;
-  byId('bundle-copy').textContent = stage === 3 && revised
-    ? 'Версия 2. Начало стало короче, титры крупнее. Обложка и подпись собраны вместе с обновлённым роликом.'
-    : current.sample;
-  byId('reel-version').textContent = stage === 3 && revised ? 'Версия 2' : current.status;
-  byId('frame').dataset.stage = stage;
-  byId('frame-name').textContent = current.frame;
-  byId('frame-label').textContent = stage === 4 && revised ? 'Свет в прихожей · v2' : 'Свет в прихожей';
-  nextStage.hidden = !current.action;
-  if (current.action) nextStage.textContent = current.action + ' →';
+  const [agent, title, desc, label, sample, action, hint] = stages[stage];
+  byId('current-agent').textContent = agent;
+  byId('stage-title').textContent = title;
+  byId('stage-desc').textContent = stage === 3 && revised ? 'Я передала правку монтажёру. Редактор титров и агент контроля качества проверили новую версию перед повторным согласованием.' : desc;
+  byId('bundle-label').textContent = stage === 3 && revised ? 'Версия 2' : label;
+  byId('bundle-copy').textContent = stage === 3 && revised ? '«Сократите вступление и увеличьте титры». Монтажёр внёс обе правки. Обложка и подпись собраны вместе с обновлённым роликом.' : (stage === 4 && revised ? sample.replace('» ·', '» · версия 2 ·') : sample);
+  byId('composer-hint').textContent = hint;
+  nextStage.hidden = !action;
+  nextStage.textContent = action ? action + ' →' : '';
   revise.hidden = stage !== 3 || revised;
   restart.hidden = stage === 0;
   progress.forEach((item, index) => {
@@ -389,17 +428,8 @@ nextStage.addEventListener('click', () => {
   showStage();
   if (nextStage.hidden) restart.focus();
 });
-revise.addEventListener('click', () => {
-  revised = true;
-  showStage();
-  nextStage.focus();
-});
-restart.addEventListener('click', () => {
-  stage = 0;
-  revised = false;
-  showStage();
-  nextStage.focus();
-});
+revise.addEventListener('click', () => { revised = true; showStage(); nextStage.focus(); });
+restart.addEventListener('click', () => { stage = 0; revised = false; showStage(); nextStage.focus(); });
 showStage();
 
 const currency = new Intl.NumberFormat('ru-RU', {style:'currency',currency:'RUB',maximumFractionDigits:2,minimumFractionDigits:0});
@@ -411,28 +441,198 @@ function recalculate() {
     const input = row.querySelector('input');
     const amount = input.valueAsNumber;
     const usable = Number.isFinite(amount) && input.validity.valid;
-    const lineTotal = usable ? Math.round(amount * Number(row.dataset.rate) * 100) / 100 : 0;
-    row.querySelector('.row-total').textContent = usable ? currency.format(lineTotal) : '—';
+    const lineTotal = usable ? Math.round(amount * Number(row.dataset.rate) * 100) : 0;
+    row.querySelector('.row-total').textContent = usable ? currency.format(lineTotal / 100) : '—';
     total += lineTotal;
     if (!usable) missing++;
   }
-  byId('estimate-total').textContent = currency.format(total);
-  byId('estimate-status').textContent = missing ? 'Для расчёта заполните объёмы от 0 до 10 000 м².' : '';
+  byId('estimate-total').textContent = currency.format(total / 100);
+  byId('estimate-status').textContent = missing ? 'Итог включает только строки с объёмом от 0 до 10 000 м².' : 'Условные расценки';
 }
 estimateRows.forEach(row => row.querySelector('input').addEventListener('input', recalculate));
 recalculate();
 
-const taskInputs = [...document.querySelectorAll('.task-list input')];
-taskInputs.forEach(input => input.addEventListener('change', () => {
-  const count = taskInputs.filter(task => !task.checked).length;
+const markupInput = byId('markup-value');
+markupInput.addEventListener('input', () => {
+  const markup = markupInput.valueAsNumber;
+  byId('supplier-total').textContent = Number.isFinite(markup) && markupInput.validity.valid
+    ? currency.format(12000 * (1 + markup / 100))
+    : 'укажите наценку от 0 до 100%';
+});
+
+const taskList = document.querySelector('.task-list');
+function updateTaskCount() {
+  const count = [...taskList.querySelectorAll('input')].filter(task => !task.closest('li').hidden && !task.checked).length;
   byId('task-count').textContent = count ? 'Открыто ' + count : 'Всё выполнено';
-}));
+}
+taskList.addEventListener('change', updateTaskCount);
+byId('accept-mail-task').addEventListener('click', event => {
+  byId('mail-task-row').hidden = false;
+  updateTaskCount();
+  event.currentTarget.disabled = true;
+  event.currentTarget.textContent = 'В реестре';
+  byId('mail-status').textContent = 'Поручение добавлено в демо.';
+});
 byId('show-reminder').addEventListener('click', event => {
   const reminder = byId('reminder');
   reminder.hidden = !reminder.hidden;
   event.currentTarget.setAttribute('aria-expanded', String(!reminder.hidden));
   event.currentTarget.textContent = reminder.hidden ? 'Показать напоминание' : 'Скрыть напоминание';
 });
+
+const nodes = {
+  idea: ['Идея и исходники', 'Вы', 'Вы описываете, какой ролик хотите, и прикладываете материалы.', 'human'],
+  producer: ['Продюсер', 'Агент 01', 'Оформляет карточку ролика, запускает нужные этапы и возвращает правку агенту, который может её внести.'],
+  research: ['Исследователь идей', 'Агент 02 · при необходимости', 'Находит открытые референсы и предлагает темы. Подключается, если нужно развить или проверить идею.'],
+  calendar: ['Редактор контент-плана', 'Агент 03', 'Выбирает рубрику и место в календаре. Использует результаты прошлых публикаций.'],
+  media: ['Медиабиблиотекарь', 'Агент 04', 'Просматривает материалы и отмечает пригодные фрагменты. Указывает, чего не хватает.'],
+  reel: ['Проектировщик Reels', 'Агент 05', 'Определяет первые секунды, структуру ролика и последовательность кадров.'],
+  script: ['Сценарист', 'Агент 06', 'Готовит реплики, закадровый текст или предложение досъёмки по структуре ролика.'],
+  edit: ['Монтажёр', 'Агент 07', 'Собирает видео через инструмент монтажа. После правок отдаёт новую версию MP4.'],
+  captions: ['Редактор титров и звука', 'Агент 08', 'Сверяет титры с речью, проверяет звук и возвращает точные правки монтажёру.'],
+  cover: ['Дизайнер обложек', 'Агент 09', 'Подбирает кадр, заголовок и компоновку обложки.'],
+  copy: ['Копирайтер', 'Агент 10', 'Пишет подпись и при необходимости адаптирует текст для Telegram и YouTube.'],
+  quality: ['Контроль качества', 'Агент 11', 'Собирает на проверку MP4, обложку и подпись. Сверяет их с брифом и возвращает ошибки на правку.'],
+  approval: ['Согласование', 'Вы', 'Вы видите видео, обложку и подпись. Утверждаете комплект или возвращаете конкретную правку.', 'human'],
+  publisher: ['Публикатор Instagram', 'Агент 12', 'Сверяет утверждённую версию, аккаунт и время. Планирует выход через Metricool.'],
+  metricool: ['Metricool → Instagram', 'Подключённый сервис', 'Принимает готовый комплект и ставит его в календарь Instagram.', 'service'],
+  analytics: ['Аналитик', 'Агент 13', 'Смотрит доступные метрики после выхода, предлагает тему или приём для следующего ролика.']
+};
+const lanes = [
+  [null, 'idea'], [null, 'producer'], ['research', null, 'media'],
+  ['calendar', 'reel'], [null, 'script'],
+  ['edit', 'cover', 'copy'], ['captions', 'quality'],
+  [null, 'approval'], [null, 'publisher'], [null, 'metricool'], [null, 'analytics']
+];
+const transfers = [
+  ['idea', 'producer', 'Замысел и исходники'],
+  ['producer', 'research', 'Бриф и вопрос для поиска'],
+  ['producer', 'media', 'Папка с материалами'],
+  ['research', 'calendar', 'Референсы и темы'],
+  ['calendar', 'reel', 'Рубрика, тема и площадка'],
+  ['media', 'reel', 'Подборка кадров и таймкоды'],
+  ['reel', 'script', 'Структура и порядок кадров'],
+  ['script', 'edit', 'План, исходники и текст'],
+  ['script', 'cover', 'Смысл ролика и ключевые кадры'],
+  ['script', 'copy', 'Сюжет и проверенные факты'],
+  ['edit', 'captions', 'Черновой MP4'],
+  ['captions', 'edit', 'Файл субтитров и правки звука', 'near'],
+  ['edit', 'quality', 'Обновлённый MP4'],
+  ['captions', 'quality', 'Результат проверки титров и звука'],
+  ['cover', 'quality', 'Обложка'],
+  ['copy', 'quality', 'Подпись'],
+  ['quality', 'approval', 'Проверенный комплект'],
+  ['quality', 'producer', 'Замечания к версии', 'right'],
+  ['approval', 'producer', 'Правки к комплекту', 'right'],
+  ['approval', 'publisher', 'Утверждённая версия и время'],
+  ['publisher', 'metricool', 'Ролик, обложка, подпись и слот'],
+  ['metricool', 'analytics', 'Доступные метрики ролика'],
+  ['analytics', 'calendar', 'Темы и гипотезы на следующий выпуск', 'left']
+];
+const graph = byId('flow-graph');
+const diagram = byId('flow-edges');
+const flowPanel = byId('flow-panel');
+const transferList = byId('flow-transfers');
+const compactFlow = matchMedia('(max-width:680px)');
+const svgNS = 'http://www.w3.org/2000/svg';
+const buttons = new Map();
+let flowSelection = 'idea';
+
+for (const lane of lanes) {
+  const row = document.createElement('div');
+  row.className = 'flow-row';
+  lane.forEach((key, column) => {
+    if (!key) return;
+    const [title, type, , kind] = nodes[key];
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'flow-node' + (kind ? ' ' + kind : '');
+    button.style.gridColumn = String(column + 1);
+    button.setAttribute('aria-pressed', 'false');
+    button.setAttribute('aria-controls', 'flow-panel');
+    const name = document.createElement('span');
+    name.textContent = title;
+    const annotation = document.createElement('small');
+    annotation.textContent = type;
+    button.append(name, annotation);
+    row.append(button);
+    buttons.set(key, button);
+    button.addEventListener('click', () => selectNode(key));
+  });
+  graph.append(row);
+}
+const paths = transfers.map(edge => {
+  const path = document.createElementNS(svgNS, 'path');
+  path.setAttribute('class', edge[3] ? 'flow-edge return' : 'flow-edge');
+  path.setAttribute('marker-end', edge[3] ? 'url(#return-arrow)' : 'url(#flow-arrow)');
+  diagram.append(path);
+  return path;
+});
+
+function drawArrows() {
+  if (compactFlow.matches) return;
+  const bounds = graph.getBoundingClientRect();
+  const box = key => {
+    const el = buttons.get(key).getBoundingClientRect();
+    return {left:el.left-bounds.left, right:el.right-bounds.left,
+      top:el.top-bounds.top, bottom:el.bottom-bounds.top,
+      x:(el.left+el.right)/2-bounds.left, y:(el.top+el.bottom)/2-bounds.top};
+  };
+  transfers.forEach(([from, to, , loop], index) => {
+    const a = box(from);
+    const b = box(to);
+    let line;
+    if (loop) {
+      const right = loop === 'right';
+      const fromX = right ? a.right : a.left;
+      const toX = right ? b.right : b.left;
+      const rail = right ? bounds.width - (from === 'approval' ? 11 : 17) : (loop === 'near' ? 13 : 5);
+      line = ['M', fromX, a.y, 'H', rail, 'V', b.y, 'H', toX + (right ? 3 : -3)].join(' ');
+    } else if (Math.abs(a.y - b.y) < 3) {
+      line = ['M', a.right, a.y, 'H', b.left - 2].join(' ');
+    } else {
+      const y = (a.bottom + b.top) / 2;
+      line = ['M', a.x, a.bottom, 'C', a.x, y, b.x, y, b.x, b.top - 2].join(' ');
+    }
+    paths[index].setAttribute('d', line);
+    paths[index].classList.toggle('focus-edge', from === flowSelection || to === flowSelection);
+  });
+}
+
+function placeFlowPanel() {
+  if (compactFlow.matches) buttons.get(flowSelection).parentElement.after(flowPanel);
+  else graph.after(flowPanel);
+  drawArrows();
+}
+
+function selectNode(key, moveFocus = false) {
+  flowSelection = key;
+  const [title, type, summary] = nodes[key];
+  byId('flow-type').textContent = type;
+  byId('flow-title').textContent = title;
+  byId('flow-summary').textContent = summary;
+  buttons.forEach((button, name) => button.setAttribute('aria-pressed', String(name === key)));
+  transferList.replaceChildren();
+  for (const [from, to, label] of transfers) {
+    if (from !== key && to !== key) continue;
+    const outgoing = key === from;
+    const other = outgoing ? to : from;
+    const item = document.createElement('li');
+    const link = document.createElement('button');
+    link.type = 'button';
+    link.textContent = (outgoing ? '→ ' : '← ') + nodes[other][0] + ' · ' + label;
+    link.addEventListener('click', () => selectNode(other, true));
+    item.append(link);
+    transferList.append(item);
+  }
+  placeFlowPanel();
+  if (moveFocus) buttons.get(key).focus();
+}
+
+compactFlow.addEventListener('change', placeFlowPanel);
+new ResizeObserver(drawArrows).observe(graph);
+selectNode('idea');
+
 const stars = document.querySelector('.stars');
 for (let i = 0; i < 46; i++) {
   const star = document.createElement('i');
