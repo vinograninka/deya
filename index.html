@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Дея · Рабочее пространство | NV</title>
+<meta name="description" content="Интерактивное демо рабочего пространства ChatGPT для Деи и её дизайн-бюро.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Noto+Serif+Display:ital,wght@0,300;0,400;1,300;1,400&family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--night:#0a0f1e;--midnight:#121a2b;--dusk:#161f35;--indigo:#1b2540;--cream:#ede7dc;--soft:#c9c3b8;--mist:#9ea3b3;--paper:#f4efe6;--white:#fbf8f2;--slate:#5e6475;--apricot:#e0a47a;--lavender:#afa2f0;--sage:#8fcba8;--gold:#e9c46a;--clay:#b66a3e;--line:#ddd5c9;--serif:"Noto Serif Display",Georgia,serif;--body:"Onest",system-ui,sans-serif;--mono:"JetBrains Mono",monospace}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--midnight);background:var(--paper);font:400 16px/1.55 var(--body)}
+h1,h2,h3,p,blockquote{margin:0}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.08;text-wrap:balance}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+[hidden]{display:none!important}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--midnight);outline-offset:4px}
+.night :focus-visible{outline-color:var(--gold)}
+.wrap{width:min(1160px,calc(100% - 96px));margin-inline:auto}
+.night{background:var(--midnight);color:var(--cream)}
+.mono,.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em}
+.eyebrow{font-family:var(--body);font-weight:600;letter-spacing:.19em;text-transform:uppercase}
+.muted{color:var(--slate)}
+.night .muted{color:var(--soft)}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:11px 18px;min-height:44px;border:1px solid transparent;border-radius:999px;font-size:.9rem;font-weight:600;line-height:1.2;background:var(--midnight);color:var(--cream);white-space:normal;text-align:center}
+.button:hover{background:var(--indigo)}
+.button.light{background:var(--apricot);color:var(--midnight)}
+.button.light:hover{background:#edba96}
+.button.ghost{background:transparent;border-color:var(--line);color:var(--midnight)}
+.button.ghost:hover{background:#eee6d9}
+.night .button.ghost{border-color:#5d6375;color:var(--cream)}
+.night .button.ghost:hover{background:var(--indigo)}
+.button:disabled{cursor:default;opacity:.55}
+header{position:relative;z-index:2;border-bottom:1px solid #ede7dc22}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:70px}
+.brand{display:inline-flex;align-items:center;gap:9px;font:400 28px/1 var(--serif);letter-spacing:.04em}
+.brand svg{width:22px;height:22px;color:var(--apricot);filter:drop-shadow(0 0 6px #e0a47a55)}
+.brand small{font:600 10px/1 var(--body);letter-spacing:.22em;color:var(--mist);border-left:1px solid #ede7dc40;padding-left:10px}
+header nav{display:flex;gap:26px;align-items:center;font-size:.88rem;color:var(--soft)}
+header nav a{padding:8px 0}
+header nav a:hover{color:var(--apricot)}
+.hero{position:relative;overflow:hidden}
+.hero .wrap{min-height:466px;display:grid;grid-template-columns:1.2fr 1fr;align-items:center;gap:20px;position:relative;z-index:1;padding-block:60px 76px}
+.hero .eyebrow{color:var(--apricot)}
+.hero h1{font-size:clamp(3.1rem,6.1vw,6.2rem);font-weight:300;letter-spacing:-.057em;margin:20px 0 22px}
+.hero em,.closing em{color:var(--apricot);font-weight:300}
+.hero .lead{max-width:49ch;color:var(--soft);font-size:1.075rem}
+.hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:14px;margin-top:26px}
+.hero-note{font-size:.8rem;color:var(--mist)}
+.space-art{position:relative;isolation:isolate;min-height:330px}
+.orbit{position:absolute;left:50%;top:49%;width:min(95%,445px);height:56%;border:1px solid #ede7dc45;border-radius:50%;transform:translate(-50%,-50%) rotate(-24deg)}
+.orbit.b{width:min(85%,375px);height:64%;border-color:#afa2f038;transform:translate(-50%,-50%) rotate(34deg)}
+.orbit.c{width:min(70%,320px);height:80%;border-color:#e0a47a40;transform:translate(-50%,-50%) rotate(-52deg)}
+.planet{position:absolute;width:46%;max-width:222px;aspect-ratio:1;left:50%;top:48%;transform:translate(-50%,-50%);border-radius:49% 51% 54% 46% / 50% 53% 47% 50%;background:#dca17a;border:1px solid #efbd9c;box-shadow:inset -26px -20px 56px #7a483d77,inset 10px 8px 35px #f8d7b580,0 0 60px #e0a47a28}
+.planet::after{content:"";position:absolute;inset:14%;border-radius:inherit;border:1px solid #f6d5bc80}
+.star{position:absolute;display:block;color:var(--gold);font-size:24px;line-height:1;text-shadow:0 0 10px currentColor}
+.star.one{left:76%;top:14%}.star.two{left:16%;top:62%;font-size:16px}.star.three{left:71%;top:82%;font-size:15px;color:var(--lavender)}
+.moon{position:absolute;top:26%;left:19%;width:18px;aspect-ratio:1;border-radius:100%;background:var(--cream);box-shadow:0 0 16px #ede7dc4d}
+.stars{position:absolute;inset:0;pointer-events:none}
+.stars i{position:absolute;width:2px;height:2px;border-radius:100%;background:var(--cream)}
+.wave{display:block;width:100%;height:24px;color:var(--paper);position:absolute;bottom:0;left:0}
+section.paper{padding:62px 0}
+.section-heading{display:grid;grid-template-columns:1fr minmax(260px,39%);gap:24px;align-items:end;margin-bottom:25px}
+.section-heading .eyebrow{color:var(--slate);margin-bottom:8px}
+.section-heading h2{font-size:clamp(2.4rem,4.5vw,4.1rem);letter-spacing:-.035em}
+.section-heading h2 em{color:var(--clay);font-weight:400}
+.section-heading p{color:var(--slate);max-width:42ch}
+.workbench{background:var(--white);border:1px solid var(--line);border-radius:28px;box-shadow:0 18px 58px #30261711;overflow:hidden;display:grid;grid-template-columns:224px minmax(0,1fr);min-height:550px}
+.rail{background:var(--dusk);color:var(--cream);padding:24px 16px;display:flex;flex-direction:column;gap:22px}
+.rail-head{padding:2px 10px}
+.rail .eyebrow{color:var(--mist);font-size:.64rem}
+.rail-name{font:400 28px var(--serif);margin-top:4px}
+.project-nav{display:grid;gap:6px}
+.project-nav button{width:100%;border:1px solid transparent;border-radius:13px;background:transparent;color:var(--cream);text-align:left;display:flex;align-items:center;gap:10px;min-height:47px;padding:7px 10px}
+.project-nav button:hover,.project-nav button[aria-pressed="true"]{background:var(--indigo);border-color:#ede7dc29}
+.project-nav button[aria-pressed="true"] .nav-label{font-weight:700}
+.project-nav .index{color:var(--mist);font:400 11px var(--mono)}
+.project-nav [aria-pressed="true"] .index{color:var(--apricot)}
+.rail-foot{margin-top:auto;padding:15px 10px 0;border-top:1px solid #ede7dc30;color:var(--soft);font-size:.77rem}
+.rail-foot strong{display:block;color:var(--cream);font-weight:600;font-size:.88rem}
+.work-pane{padding:27px 30px 25px;min-width:0}
+.pane-top{display:flex;justify-content:space-between;gap:12px;align-items:start;margin-bottom:19px}
+.pane-top h3{font-size:37px;letter-spacing:-.035em}
+.pane-top .eyebrow{color:var(--slate);margin-bottom:3px;font-size:.64rem}
+.chip{display:inline-flex;align-items:center;padding:4px 10px;border:1px solid #cfc8bb;border-radius:99px;font-size:.73rem;font-weight:600;line-height:1.45}
+.chip.success{background:#e2efe5;border-color:#c5ddce;color:#254b39}
+.chip.warm{background:#f4e6d7;border-color:#e4c9b6;color:#673c24}
+.pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:18px}
+.pipeline span{min-width:0;color:var(--slate);font-size:.72rem;line-height:1.2;border-top:3px solid #e7dfd3;padding-top:6px}
+.pipeline .complete{border-color:#9ab5a0}
+.pipeline .active{border-color:#b47755;color:var(--midnight);font-weight:700}
+.scene{display:grid;grid-template-columns:minmax(0,1fr) 155px;gap:20px;min-height:253px}
+.scene h4{margin:0 0 7px;font-size:1.08rem}
+.scene p{font-size:.92rem;color:var(--slate)}
+.bundle{background:var(--paper);border:1px solid #e7ded1;border-radius:15px;padding:13px 15px;margin-top:12px;font-size:.87rem}
+.bundle p{font-size:.86rem;color:var(--midnight)}
+.bundle .eyebrow{font-size:.63rem;color:var(--slate);margin-bottom:3px}
+.bundle ul{margin:0;padding-left:17px}
+.frame{position:relative;border-radius:16px;overflow:hidden;min-height:235px;background:#282b3b;color:var(--cream);border:1px solid #121a2b}
+.frame-visual{position:absolute;inset:10% 11% 21%;border:1px solid #d5b79c5c}
+.room{position:absolute;inset:10% 12%;border:1px solid #dfcbb5;color:#d5b79c}
+.room::before{content:"";position:absolute;inset:13% 12% 42% 44%;border:1px solid currentColor;border-bottom:0}
+.room::after{content:"";position:absolute;inset:61% 16% 16% 15%;border:1px solid currentColor;border-radius:8px;background:#d5b79c23;transition:background .35s,transform .35s}
+.frame[data-stage="1"] .room::after{transform:translateY(-6px);background:#afa2f050}
+.frame[data-stage="2"] .room::after,.frame[data-stage="3"] .room::after,.frame[data-stage="4"] .room::after{background:#e0a47a6b}
+.frame-name,.frame-label{position:absolute;left:10px;right:10px;text-align:center}
+.frame-name{top:9px;font-size:.67rem;color:#e8ceb8}
+.frame-label{bottom:10px;font-size:.78rem;line-height:1.2;font-weight:500}
+.work-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:16px;min-height:44px}
+.work-actions .restart{margin-left:auto}
+.footnote{margin-top:8px;color:var(--slate);font-size:.75rem}
+.test-description{color:var(--slate);margin-bottom:16px}
+.estimate{width:100%;border-collapse:collapse;font-size:.9rem}
+.estimate th,.estimate td{text-align:left;padding:11px 7px;border-bottom:1px solid var(--line)}
+.estimate th{color:var(--slate);font-size:.75rem;font-weight:600}
+.estimate th:last-child,.estimate td:last-child{text-align:right}
+.estimate input{width:65px;max-width:100%;min-height:40px;border:1px solid #cfc8bb;border-radius:8px;background:#fffdf9;padding:4px 6px}
+.money{white-space:nowrap;font-variant-numeric:tabular-nums}
+.estimate tfoot td{font-weight:700;border-bottom:0}
+.task-list{list-style:none;padding:0;margin:8px 0}
+.task-list li{display:flex;gap:10px;align-items:center;padding:11px 2px;border-bottom:1px solid var(--line)}
+.task-list input{width:19px;height:19px;accent-color:var(--midnight);flex:0 0 auto}
+.task-list label{flex:1;display:flex;justify-content:space-between;align-items:center;gap:8px;cursor:pointer;font-size:.92rem}
+.task-list input:checked+label .task-name{text-decoration:line-through;color:var(--slate)}
+.notice{margin-top:12px;border:1px solid #bdd0c5;background:#edf5ec;border-radius:14px;padding:11px 14px;font-size:.89rem}
+#agents{padding-top:24px}
+.agent-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.agent-group{background:var(--white);border:1px solid var(--line);border-radius:19px;padding:19px 22px}
+.agent-group>h3{font-size:26px;margin-bottom:8px}
+details{border-top:1px solid #e7ded3}
+summary{list-style:none;display:grid;grid-template-columns:25px 1fr 20px;align-items:center;gap:8px;padding:10px 0;min-height:44px;font-size:.93rem;font-weight:600;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--mono);color:var(--slate);text-align:right}
+details[open] summary::after{content:"−"}
+details .role-index{color:var(--slate);font:400 11px var(--mono)}
+details p{padding:0 22px 12px 33px;color:var(--slate);font-size:.87rem}
+.roles-note{margin-top:14px;color:var(--slate);font-size:.88rem}
+.closing{position:relative;padding:58px 0 36px;overflow:hidden;background:var(--dusk)}
+.closing .wrap{position:relative;z-index:1}
+.closing h2{font-size:clamp(2.8rem,5vw,4.7rem);font-weight:300;letter-spacing:-.04em}
+.closing .eyebrow{color:var(--apricot);margin-bottom:9px}
+.start-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:22px 0 30px}
+.start-grid article{border-top:1px solid #ede7dc45;padding-top:12px}
+.start-grid h3{font-size:22px}
+.start-grid p{margin-top:5px;font-size:.91rem;color:var(--soft)}
+footer{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid #ede7dc32;padding-top:18px}
+footer p{color:var(--mist);font-size:.8rem;text-align:right}
+@media(max-width:900px){
+ .wrap{width:calc(100% - 56px)}.hero .wrap{min-height:420px}.workbench{grid-template-columns:180px minmax(0,1fr)}.work-pane{padding:24px 22px}.scene{grid-template-columns:minmax(0,1fr) 133px;gap:13px}.frame{min-height:215px}
+}
+@media(max-width:680px){
+ .wrap{width:calc(100% - 32px)}header .wrap{min-height:60px}header nav{gap:14px;font-size:.78rem}header nav a:first-child{display:none}.brand small{display:none}
+ .hero .wrap{grid-template-columns:1fr;gap:0;padding-block:40px 22px}.hero h1{font-size:clamp(2.75rem,10vw,4.7rem);margin:12px 0 14px}.hero .lead{font-size:1rem}.hero-actions{margin-top:20px}.space-art{min-height:190px;width:min(360px,100%);margin:auto}.planet{width:34%}
+ section.paper{padding:43px 0}.section-heading{grid-template-columns:1fr;gap:8px;margin-bottom:17px}.section-heading h2{font-size:clamp(2.3rem,9vw,3rem)}
+ .workbench{display:block;min-height:0;border-radius:21px}.rail{padding:13px;gap:8px}.rail-head,.rail-foot{display:none}.project-nav{display:flex}.project-nav button{flex:1;justify-content:center;font-size:.83rem;padding:6px 5px;gap:5px}.project-nav .index{font-size:9px}
+ .work-pane{padding:18px 14px}.pane-top h3{font-size:30px}.pane-top{gap:8px}.pane-top .chip{font-size:.66rem}.scene{grid-template-columns:minmax(0,1fr) 105px;gap:10px;min-height:0}.frame{min-height:174px;align-self:start}.scene h4{font-size:.96rem}.scene p,.bundle{font-size:.81rem}.bundle{padding:9px 10px}.bundle p{font-size:.8rem}.pipeline span{font-size:.62rem}.work-actions{gap:5px}.work-actions .button{font-size:.77rem;padding-inline:11px}.work-actions .restart{margin-left:0}
+ .agent-groups,.start-grid{grid-template-columns:1fr}.agent-group{padding:14px 15px}.start-grid{gap:11px}.closing{padding:39px 0 27px}.estimate{font-size:.75rem}.estimate th,.estimate td{padding:9px 4px}.estimate input{width:49px}
+}
+@media(max-width:370px){
+ .scene{grid-template-columns:1fr}.frame{display:none}.hero-note{max-width:21ch}.pipeline span{font-size:.58rem}.task-list label{align-items:start;flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="night" id="top">
+  <div class="wrap">
+    <a href="#top" class="brand" aria-label="NV · Claude, начало страницы"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 2c1.4 6.6 4.4 9.6 14 14-9.6 4.4-12.6 7.4-14 14-1.4-6.6-4.4-9.6-14-14 9.6-4.4 12.6-7.4 14-14z"/></svg>NV<small>CLAUDE</small></a>
+    <nav aria-label="Разделы демо"><a href="#demo">Пространство</a><a href="#agents">13 агентов</a><a href="#start">Начало работы</a></nav>
+  </div>
+</header>
+<main>
+  <div class="hero night">
+    <div class="stars" aria-hidden="true"></div>
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Интерактивное демо · Дея</p>
+        <h1>Ваше рабочее<br> <em>пространство.</em></h1>
+        <p class="lead">Сметы, контент и поручения дизайн-бюро в ChatGPT. Откройте любой проект и посмотрите, как будет идти работа.</p>
+        <div class="hero-actions"><a class="button light" href="#demo">Открыть пространство <span aria-hidden="true">↓</span></a><span class="hero-note">Условные материалы и данные</span></div>
+      </div>
+      <div class="space-art" aria-hidden="true"><div class="orbit b"></div><div class="orbit c"></div><div class="planet"></div><div class="orbit"></div><span class="moon"></span><span class="star one">✦</span><span class="star two">✦</span><span class="star three">✦</span></div>
+    </div>
+    <svg class="wave" viewBox="0 0 1200 24" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 15 C280 45 465 -7 787 8 C952 17 1076 22 1200 6 V24 H0 Z"/></svg>
+  </div>
+
+  <section class="paper wrap" id="demo" aria-labelledby="demo-title">
+    <div class="section-heading">
+      <div><p class="eyebrow">Ваше пространство в ChatGPT</p><h2 id="demo-title">Три <em>проекта.</em></h2></div>
+      <p>Для Вас и дизайнера предусмотрены отдельные рабочие места в ChatGPT Business. «Контент» — общий проект. Доступ к сметам и задачам определим с Вами.</p>
+    </div>
+    <div class="workbench">
+      <aside class="rail night">
+        <div class="rail-head"><p class="eyebrow">Рабочее пространство</p><p class="rail-name">Бюро Деи</p></div>
+        <nav class="project-nav" aria-label="Проекты">
+          <button type="button" data-project="estimate" aria-pressed="false" aria-controls="estimate"><span class="index">01</span><span class="nav-label">Сметы</span></button>
+          <button type="button" data-project="content" aria-pressed="true" aria-controls="content"><span class="index">02</span><span class="nav-label">Контент</span></button>
+          <button type="button" data-project="tasks" aria-pressed="false" aria-controls="tasks"><span class="index">03</span><span class="nav-label">Задачи</span></button>
+        </nav>
+        <div class="rail-foot"><strong>Иллюстрация интерфейса</strong>Действия в демо показаны на примерах.</div>
+      </aside>
+
+      <div class="work-pane">
+        <section class="project" id="content" aria-labelledby="content-title">
+          <div class="pane-top"><div><p class="eyebrow">Один ролик · от исходников до выхода</p><h3 id="content-title">Контент</h3></div><span class="chip warm" id="reel-version">Карточка ролика</span></div>
+          <div class="pipeline" aria-label="Этапы ролика">
+            <span aria-current="step" class="active">Материалы</span><span>Проект Reels</span><span>Монтаж</span><span>Согласование</span><span>Metricool</span>
+          </div>
+          <div class="scene">
+            <div id="scene-copy" aria-live="polite">
+              <h4 id="stage-title">Вы даёте материал и замысел</h4>
+              <p id="stage-desc">Продюсер заводит карточку ролика. Дизайнер может добавить фото и эффекты оформления в этот же проект.</p>
+              <div class="bundle"><p class="eyebrow" id="bundle-label">Ваша заявка</p><p id="bundle-copy">«Покажите, как мы добавили свет в прихожей. В папке есть кадры до и после. Хочу спокойный ролик с титрами».</p></div>
+            </div>
+            <div class="frame" id="frame" data-stage="0" aria-label="Условный кадр из ролика">
+              <div class="frame-visual" aria-hidden="true"><div class="room"></div></div>
+              <span class="frame-name mono" id="frame-name">ИСХОДНИКИ</span><span class="frame-label" id="frame-label">Свет в прихожей</span>
+            </div>
+          </div>
+          <div class="work-actions">
+            <button class="button" type="button" id="next-stage">Запустить демо <span aria-hidden="true">→</span></button>
+            <button class="button ghost" type="button" id="reel-revision" hidden>Попросить правку</button>
+            <button class="button ghost restart" type="button" id="reel-restart" hidden>Начать заново</button>
+          </div>
+          <p class="footnote">Демо показывает порядок работы на примере одного Reels.</p>
+        </section>
+
+        <section class="project" id="estimate" aria-labelledby="estimate-title" hidden>
+          <div class="pane-top"><div><p class="eyebrow">Расчёт по Вашему шаблону</p><h3 id="estimate-title">Сметы</h3></div><span class="chip warm">Черновик</span></div>
+          <p class="test-description">Измените объёмы. Суммы пересчитаются по условным расценкам. В рабочем проекте будут Ваши шаблон и справочник.</p>
+          <table class="estimate">
+            <thead><tr><th scope="col">Работы</th><th scope="col">Объём</th><th scope="col">За м²</th><th scope="col">Сумма</th></tr></thead>
+            <tbody>
+              <tr data-rate="480"><th scope="row">Грунтовка</th><td><input type="number" value="18" min="0" max="10000" step="any" inputmode="decimal" aria-label="Объём грунтовки, м²"></td><td class="money">480 ₽</td><td class="money row-total">8 640 ₽</td></tr>
+              <tr data-rate="1050"><th scope="row">Окраска</th><td><input type="number" value="18" min="0" max="10000" step="any" inputmode="decimal" aria-label="Объём окраски, м²"></td><td class="money">1 050 ₽</td><td class="money row-total">18 900 ₽</td></tr>
+              <tr data-rate="1550"><th scope="row">Укладка плитки</th><td><input type="number" value="7" min="0" max="10000" step="any" inputmode="decimal" aria-label="Объём укладки плитки, м²"></td><td class="money">1 550 ₽</td><td class="money row-total">10 850 ₽</td></tr>
+            </tbody>
+            <tfoot><tr><td colspan="3">Итого по заполненным строкам</td><td class="money"><output id="estimate-total">38 390 ₽</output></td></tr></tfoot>
+          </table>
+          <div class="bundle"><p class="eyebrow">Перед отправкой</p><p>Вы проверяете позиции, расценки и итог. Позиции без данных отмечаются в черновике.</p></div>
+          <p class="footnote" id="estimate-status" aria-live="polite"></p>
+        </section>
+
+        <section class="project" id="tasks" aria-labelledby="tasks-title" hidden>
+          <div class="pane-top"><div><p class="eyebrow">Реестр поручений по объектам</p><h3 id="tasks-title">Задачи</h3></div><span id="task-count" class="chip warm" aria-live="polite">Открыто 3</span></div>
+          <p class="test-description">После встречи продиктуйте договорённости. Помощник предложит задачи, ответственных и сроки. Попробуйте отметить выполненное.</p>
+          <ul class="task-list">
+            <li><input type="checkbox" id="task-light"><label for="task-light"><span class="task-name">Уточнить схему освещения</span><span class="chip">Дизайнер · сегодня</span></label></li>
+            <li><input type="checkbox" id="task-estimate"><label for="task-estimate"><span class="task-name">Сверить объёмы по смете</span><span class="chip">Дея · завтра</span></label></li>
+            <li><input type="checkbox" id="task-reel"><label for="task-reel"><span class="task-name">Посмотреть новую версию ролика</span><span class="chip">Дея · завтра</span></label></li>
+          </ul>
+          <div class="work-actions"><button type="button" class="button" id="show-reminder" aria-controls="reminder" aria-expanded="false">Показать напоминание</button></div>
+          <p class="notice" id="reminder" role="status" hidden>Пример напоминания · Сегодня, 17:00. Уточните схему освещения по объекту.</p>
+          <p class="footnote">После подключения почты помощник сможет предлагать поручения из важных писем на Вашу проверку.</p>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <section class="paper wrap" id="agents" aria-labelledby="agents-title">
+    <div class="section-heading">
+      <div><p class="eyebrow">Контент-завод</p><h2 id="agents-title">13 <em>агентов.</em></h2></div>
+      <p>Вы ставите задачу продюсеру. Он передаёт её нужным специалистам. Откройте роль, чтобы увидеть, что она готовит.</p>
+    </div>
+    <div class="agent-groups">
+      <article class="agent-group"><h3>План и материалы</h3>
+        <details><summary><span class="role-index">01</span>Продюсер</summary><p>Разбирает Вашу заявку, ведёт карточку ролика, передаёт работу и собирает итоговый комплект на согласование.</p></details>
+        <details><summary><span class="role-index">02</span>Исследователь идей</summary><p>Изучает открытые референсы и предлагает идеи, которые можно показать на материалах Вашего бюро.</p></details>
+        <details><summary><span class="role-index">03</span>Редактор контент-плана</summary><p>Выбирает рубрики, темы и даты с учётом готовых материалов и результатов прошлых роликов.</p></details>
+        <details><summary><span class="role-index">04</span>Медиабиблиотекарь</summary><p>Разбирает фото и видео, находит подходящие фрагменты и отмечает, где нужна досъёмка или проверка.</p></details>
+      </article>
+      <article class="agent-group"><h3>Сценарий и съёмка</h3>
+        <details open><summary><span class="role-index">05</span>Проектировщик Reels</summary><p>Переводит Вашу идею в структуру ролика. Выбирает первые секунды, порядок кадров и то, чем подтвердить главную мысль.</p></details>
+        <details><summary><span class="role-index">06</span>Сценарист</summary><p>Пишет реплики и закадровый текст. Готовит список коротких фрагментов, которые пригодится доснять.</p></details>
+      </article>
+      <article class="agent-group"><h3>Сборка ролика</h3>
+        <details open><summary><span class="role-index">07</span>Монтажёр</summary><p>Собирает исходники через инструмент монтажа, отдаёт видеофайл MP4 и выпускает новую версию по Вашим правкам.</p></details>
+        <details><summary><span class="role-index">08</span>Редактор титров и звука</summary><p>Сверяет субтитры с речью, проверяет слышимость голоса и синхрон. Передаёт точные правки монтажёру.</p></details>
+        <details><summary><span class="role-index">09</span>Дизайнер обложек</summary><p>Подбирает кадр, заголовок и компоновку. Дизайнер бюро может уточнить оформление перед выпуском.</p></details>
+        <details><summary><span class="role-index">10</span>Копирайтер</summary><p>Готовит подпись к ролику и при необходимости адаптирует текст для Telegram и YouTube.</p></details>
+      </article>
+      <article class="agent-group"><h3>Выпуск и результаты</h3>
+        <details><summary><span class="role-index">11</span>Контроль качества</summary><p>Проверяет факты, звук, титры, обложку и соответствие Вашему замыслу. Отправляет замечания нужному исполнителю.</p></details>
+        <details open><summary><span class="role-index">12</span>Публикатор Instagram</summary><p>Передаёт утверждённый Reel в Metricool, сверяет аккаунт, дату и вложение. После наступления срока проверяет выход.</p></details>
+        <details><summary><span class="role-index">13</span>Аналитик</summary><p>Смотрит доступные просмотры, сохранения и другие метрики. Предлагает один понятный тест для следующего ролика.</p></details>
+      </article>
+    </div>
+    <p class="roles-note">Видео, обложка и подпись собираются в одной карточке. Вы видите актуальную версию и утверждаете комплект перед публикацией.</p>
+  </section>
+
+  <section class="closing night" id="start" aria-labelledby="start-title">
+    <div class="wrap">
+      <p class="eyebrow">Начало работы</p><h2 id="start-title">Начнём <em>с одного объекта.</em></h2>
+      <div class="start-grid">
+        <article><h3>От Вас</h3><p>Исходники и идея одного ролика, пример сметы с расценками и несколько текущих поручений.</p></article>
+        <article><h3>Подключение</h3><p>Я настрою проекты и роли, подключу инструмент монтажа и проверю связку с Вашим Instagram через Metricool.</p></article>
+        <article><h3>Первая проверка</h3><p>Вы посмотрите ролик, дадите правку и утвердите комплект. Мы проверим, как он попадает в календарь.</p></article>
+      </div>
+      <footer><a class="button ghost" href="#demo">Вернуться к демо <span aria-hidden="true">↑</span></a><p>NV · Персональная настройка ИИ</p></footer>
+    </div>
+  </section>
+</main>
+<script>
+const byId = id => document.getElementById(id);
+const projectButtons = [...document.querySelectorAll('[data-project]')];
+projectButtons.forEach(button => button.addEventListener('click', () => {
+  projectButtons.forEach(peer => {
+    const selected = peer === button;
+    peer.setAttribute('aria-pressed', String(selected));
+    byId(peer.dataset.project).hidden = !selected;
+  });
+}));
+
+const stages = [
+  {
+    title: 'Вы даёте материал и замысел',
+    description: 'Продюсер заводит карточку ролика. Дизайнер может добавить фото и референсы в этот же проект.',
+    label: 'Ваша заявка',
+    sample: '«Покажите, как мы добавили свет в прихожей. В папке есть кадры до и после. Хочу спокойный ролик с титрами».',
+    action: 'Запустить демо', frame: 'ИСХОДНИКИ', status: 'Карточка ролика'
+  },
+  {
+    title: 'Проектировщик собирает структуру Reels',
+    description: 'Медиабиблиотекарь находит кадры. Проектировщик выбирает первые секунды и порядок показа. Сценарист пишет короткие реплики.',
+    label: 'Фрагмент монтажного плана',
+    sample: '0–3 с · прихожая до ремонта. 3–12 с · как меняется свет. Финал · тот же ракурс после ремонта.',
+    action: 'Передать монтажёру', frame: 'ПЛАН КАДРОВ', status: 'Структура готова'
+  },
+  {
+    title: 'Монтажёр собирает видео',
+    description: 'Монтажёр обрезает фрагменты и собирает ролик. Редактор проверяет титры и звук. Обложка и подпись готовятся параллельно.',
+    label: 'Что готовит команда',
+    sample: 'Вертикальный MP4, обложка «Как мы добавили свет» и подпись о решении для прихожей.',
+    action: 'Открыть согласование', frame: 'ЧЕРНОВИК MP4', status: 'Версия 1'
+  },
+  {
+    title: 'Вы смотрите и даёте правку',
+    description: 'Продюсер приносит видео, обложку и подпись одним комплектом. После проверки Вы можете вернуть конкретный фрагмент на правку.',
+    label: 'Комплект на согласование',
+    sample: 'Ролик «Свет в прихожей», обложка и подпись для Instagram. Предлагаемый слот — пятница, 18:30 МСК.',
+    action: 'Утвердить в демо', frame: 'НА СОГЛАСОВАНИИ', status: 'Версия 1'
+  },
+  {
+    title: 'Ролик попадает в календарь Metricool',
+    description: 'Публикатор ставит утверждённый комплект в календарь Instagram и сверяет вложение. После выхода аналитик посмотрит доступные метрики.',
+    label: 'Пример записи Metricool',
+    sample: 'Instagram Reels · «Свет в прихожей» · пятница, 18:30 МСК · запланировано в демо.',
+    action: '', frame: 'В КАЛЕНДАРЕ', status: 'Утверждено'
+  }
+];
+const nextStage = byId('next-stage');
+const revise = byId('reel-revision');
+const restart = byId('reel-restart');
+const progress = [...document.querySelectorAll('.pipeline span')];
+let stage = 0;
+let revised = false;
+function showStage() {
+  const current = stages[stage];
+  byId('stage-title').textContent = current.title;
+  byId('stage-desc').textContent = current.description;
+  byId('bundle-label').textContent = current.label;
+  byId('bundle-copy').textContent = stage === 3 && revised
+    ? 'Версия 2. Начало стало короче, титры крупнее. Обложка и подпись собраны вместе с обновлённым роликом.'
+    : current.sample;
+  byId('reel-version').textContent = stage === 3 && revised ? 'Версия 2' : current.status;
+  byId('frame').dataset.stage = stage;
+  byId('frame-name').textContent = current.frame;
+  byId('frame-label').textContent = stage === 4 && revised ? 'Свет в прихожей · v2' : 'Свет в прихожей';
+  nextStage.hidden = !current.action;
+  if (current.action) nextStage.textContent = current.action + ' →';
+  revise.hidden = stage !== 3 || revised;
+  restart.hidden = stage === 0;
+  progress.forEach((item, index) => {
+    item.classList.toggle('complete', index < stage);
+    item.classList.toggle('active', index === stage);
+    if (index === stage) item.setAttribute('aria-current', 'step');
+    else item.removeAttribute('aria-current');
+  });
+}
+nextStage.addEventListener('click', () => {
+  if (stage >= stages.length - 1) return;
+  stage++;
+  showStage();
+  if (nextStage.hidden) restart.focus();
+});
+revise.addEventListener('click', () => {
+  revised = true;
+  showStage();
+  nextStage.focus();
+});
+restart.addEventListener('click', () => {
+  stage = 0;
+  revised = false;
+  showStage();
+  nextStage.focus();
+});
+showStage();
+
+const currency = new Intl.NumberFormat('ru-RU', {style:'currency',currency:'RUB',maximumFractionDigits:2,minimumFractionDigits:0});
+const estimateRows = [...document.querySelectorAll('.estimate tbody tr')];
+function recalculate() {
+  let total = 0;
+  let missing = 0;
+  for (const row of estimateRows) {
+    const input = row.querySelector('input');
+    const amount = input.valueAsNumber;
+    const usable = Number.isFinite(amount) && input.validity.valid;
+    const lineTotal = usable ? Math.round(amount * Number(row.dataset.rate) * 100) / 100 : 0;
+    row.querySelector('.row-total').textContent = usable ? currency.format(lineTotal) : '—';
+    total += lineTotal;
+    if (!usable) missing++;
+  }
+  byId('estimate-total').textContent = currency.format(total);
+  byId('estimate-status').textContent = missing ? 'Для расчёта заполните объёмы от 0 до 10 000 м².' : '';
+}
+estimateRows.forEach(row => row.querySelector('input').addEventListener('input', recalculate));
+recalculate();
+
+const taskInputs = [...document.querySelectorAll('.task-list input')];
+taskInputs.forEach(input => input.addEventListener('change', () => {
+  const count = taskInputs.filter(task => !task.checked).length;
+  byId('task-count').textContent = count ? 'Открыто ' + count : 'Всё выполнено';
+}));
+byId('show-reminder').addEventListener('click', event => {
+  const reminder = byId('reminder');
+  reminder.hidden = !reminder.hidden;
+  event.currentTarget.setAttribute('aria-expanded', String(!reminder.hidden));
+  event.currentTarget.textContent = reminder.hidden ? 'Показать напоминание' : 'Скрыть напоминание';
+});
+const stars = document.querySelector('.stars');
+for (let i = 0; i < 46; i++) {
+  const star = document.createElement('i');
+  star.style.left = ((i * 173 + 57) % 997) / 10 + '%';
+  star.style.top = ((i * 137 + 19) % 929) / 10 + '%';
+  star.style.opacity = .10 + (i % 6) * .08;
+  stars.append(star);
+}
+</script>
+</body>
+</html>
