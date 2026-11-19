@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Дея · Рабочее пространство | NV</title>
+<meta name="description" content="Интерактивное демо рабочего пространства ChatGPT для Деи и её дизайн-бюро.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Noto+Serif+Display:ital,wght@0,300;0,400;1,300;1,400&family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--night:#0a0f1e;--midnight:#121a2b;--dusk:#161f35;--indigo:#1b2540;--cream:#ede7dc;--soft:#c9c3b8;--mist:#9ea3b3;--paper:#f4efe6;--white:#fbf8f2;--slate:#5e6475;--apricot:#e0a47a;--lavender:#afa2f0;--sage:#8fcba8;--gold:#e9c46a;--clay:#b66a3e;--line:#ddd5c9;--serif:"Noto Serif Display",Georgia,serif;--body:"Onest",system-ui,sans-serif;--mono:"JetBrains Mono",monospace}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--midnight);background:var(--paper);font:400 16px/1.55 var(--body)}
+h1,h2,h3,p,blockquote{margin:0}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.08;text-wrap:balance}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+[hidden]{display:none!important}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--midnight);outline-offset:4px}
+.night :focus-visible{outline-color:var(--gold)}
+.wrap{width:min(1160px,calc(100% - 96px));margin-inline:auto}
+.night{background:var(--midnight);color:var(--cream)}
+.mono,.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em}
+.eyebrow{font-family:var(--body);font-weight:600;letter-spacing:.19em;text-transform:uppercase}
+.muted{color:var(--slate)}
+.night .muted{color:var(--soft)}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:11px 18px;min-height:44px;border:1px solid transparent;border-radius:999px;font-size:.9rem;font-weight:600;line-height:1.2;background:var(--midnight);color:var(--cream);white-space:normal;text-align:center}
+.button:hover{background:var(--indigo)}
+.button.light{background:var(--apricot);color:var(--midnight)}
+.button.light:hover{background:#edba96}
+.button.ghost{background:transparent;border-color:var(--line);color:var(--midnight)}
+.button.ghost:hover{background:#eee6d9}
+.night .button.ghost{border-color:#5d6375;color:var(--cream)}
+.night .button.ghost:hover{background:var(--indigo)}
+.button:disabled{cursor:default;opacity:.55}
+header{position:relative;z-index:2;border-bottom:1px solid #ede7dc22}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:70px}
+.brand{display:inline-flex;align-items:center;gap:9px;font:400 28px/1 var(--serif);letter-spacing:.04em}
+.brand svg{width:22px;height:22px;color:var(--apricot);filter:drop-shadow(0 0 6px #e0a47a55)}
+.brand small{font:600 10px/1 var(--body);letter-spacing:.22em;color:var(--mist);border-left:1px solid #ede7dc40;padding-left:10px}
+header nav{display:flex;gap:26px;align-items:center;font-size:.88rem;color:var(--soft)}
+header nav a{padding:8px 0}
+header nav a:hover{color:var(--apricot)}
+.hero{position:relative;overflow:hidden}
+.hero .wrap{min-height:466px;display:grid;grid-template-columns:1.2fr 1fr;align-items:center;gap:20px;position:relative;z-index:1;padding-block:60px 76px}
+.hero .eyebrow{color:var(--apricot)}
+.hero h1{font-size:clamp(3.1rem,6.1vw,6.2rem);font-weight:300;letter-spacing:-.057em;margin:20px 0 22px}
+.hero em,.closing em{color:var(--apricot);font-weight:300}
+.hero .lead{max-width:49ch;color:var(--soft);font-size:1.075rem}
+.hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:14px;margin-top:26px}
+.hero-note{font-size:.8rem;color:var(--mist)}
+.space-art{position:relative;isolation:isolate;min-height:330px}
+.orbit{position:absolute;left:50%;top:49%;width:min(95%,445px);height:56%;border:1px solid #ede7dc45;border-radius:50%;transform:translate(-50%,-50%) rotate(-24deg)}
+.orbit.b{width:min(85%,375px);height:64%;border-color:#afa2f038;transform:translate(-50%,-50%) rotate(34deg)}
+.orbit.c{width:min(70%,320px);height:80%;border-color:#e0a47a40;transform:translate(-50%,-50%) rotate(-52deg)}
+.planet{position:absolute;width:46%;max-width:222px;aspect-ratio:1;left:50%;top:48%;transform:translate(-50%,-50%);border-radius:49% 51% 54% 46% / 50% 53% 47% 50%;background:#dca17a;border:1px solid #efbd9c;box-shadow:inset -26px -20px 56px #7a483d77,inset 10px 8px 35px #f8d7b580,0 0 60px #e0a47a28}
+.planet::after{content:"";position:absolute;inset:14%;border-radius:inherit;border:1px solid #f6d5bc80}
+.star{position:absolute;display:block;color:var(--gold);font-size:24px;line-height:1;text-shadow:0 0 10px currentColor}
+.star.one{left:76%;top:14%}.star.two{left:16%;top:62%;font-size:16px}.star.three{left:71%;top:82%;font-size:15px;color:var(--lavender)}
+.moon{position:absolute;top:26%;left:19%;width:18px;aspect-ratio:1;border-radius:100%;background:var(--cream);box-shadow:0 0 16px #ede7dc4d}
+.stars{position:absolute;inset:0;pointer-events:none}
+.stars i{position:absolute;width:2px;height:2px;border-radius:100%;background:var(--cream)}
+.wave{display:block;width:100%;height:24px;color:var(--paper);position:absolute;bottom:0;left:0}
+section.paper{padding:62px 0}
+.section-heading{display:grid;grid-template-columns:1fr minmax(260px,39%);gap:24px;align-items:end;margin-bottom:25px}
+.section-heading .eyebrow{color:var(--slate);margin-bottom:8px}
+.section-heading h2{font-size:clamp(2.4rem,4.5vw,4.1rem);letter-spacing:-.035em}
+.section-heading h2 em{color:var(--clay);font-weight:400}
+.section-heading p{color:var(--slate);max-width:42ch}
+/* The NV page frames a neutral, ChatGPT-style working area. */
+.workbench{display:grid;grid-template-columns:236px minmax(0,1fr);border:1px solid #d8d7d5;border-radius:21px;overflow:hidden;background:#fff;box-shadow:0 18px 60px #30261715;min-height:645px;color:#202020;font:400 14px/1.5 system-ui,-apple-system,sans-serif}
+.gpt-sidebar{background:#f8f8f8;border-right:1px solid #ebebeb;padding:19px 12px;display:flex;flex-direction:column;gap:20px}
+.gpt-brand{display:flex;align-items:center;gap:10px;padding:5px 7px}
+.gpt-name{font-size:17px;font-weight:650;line-height:1.25}
+.gpt-brand small,.sidebar-label,.gpt-top .muted{font-size:11px;color:#606060}
+.gpt-brand small{display:block;margin-top:2px}
+.gpt-icon{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.project-nav{display:grid;gap:2px}
+.project-nav button{width:100%;border:0;border-radius:8px;background:transparent;color:#232323;text-align:left;display:flex;align-items:center;gap:9px;min-height:42px;padding:6px 10px;font-weight:500}
+.project-nav button[aria-pressed=true],.project-nav button:hover{background:#eaeaea}
+.sidebar-label{margin:0 10px 5px;font-weight:650}
+.sidebar-account{display:flex;align-items:center;gap:9px;margin-top:auto;padding:12px 7px 0;border-top:1px solid #e6e6e6}
+.avatar{display:grid;place-items:center;width:31px;height:31px;border-radius:100%;background:#e9e0f3;color:#4b3563;flex:none;font-size:12px;font-weight:700}
+.sidebar-account strong{display:block;font-size:13px}
+.sidebar-account small{color:#5b5b5b;font-size:11px}
+.work-pane{min-width:0;background:white}
+.gpt-top{min-height:60px;border-bottom:1px solid #efefef;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 22px}
+.gpt-crumb{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:650;min-width:0}
+.gpt-tag{display:inline-flex;align-items:center;gap:5px;border:1px solid #e1e1e1;border-radius:30px;padding:4px 9px;color:#505050;font-size:11px;line-height:1.2;white-space:nowrap}
+.thread{max-width:754px;margin:0 auto;padding:25px 26px 21px}
+.thread-title{font:680 clamp(1.22rem,2.4vw,1.62rem)/1.2 system-ui,-apple-system,sans-serif;margin:0 0 7px;letter-spacing:-.035em}
+.thread-intro{color:#535353;margin-bottom:20px;max-width:65ch}
+.chats{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 18px}
+.chats button{border:1px solid #e3e3e3;background:white;min-height:35px;border-radius:22px;padding:5px 11px;font-size:12px}
+.chats button[aria-pressed=true],.chats button:hover{background:#f2f2f2;border-color:#d3d3d3}
+.user-turn{max-width:88%;margin:0 0 16px auto;background:#f1f1f1;border-radius:20px 20px 5px 20px;padding:11px 15px;font-size:14px}
+.user-turn .gpt-tag{background:#fff;margin-bottom:6px}
+.assistant-line{display:flex;gap:10px;align-items:flex-start;margin:0 0 12px}
+.assistant-label{font-weight:650;font-size:12px;margin-bottom:3px}
+.assistant-avatar{display:grid;place-items:center;flex:none;width:26px;height:26px;border-radius:50%;border:1px solid #ddd;font-size:15px}
+.assistant-body{flex:1;min-width:0}
+.assistant-body p{color:#4a4a4a}
+.reel-track{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin:12px 0}
+.reel-track span{min-width:0;padding-top:4px;border-top:3px solid #e6e6e6;color:#535353;font-size:.72rem;line-height:1.2}
+.reel-track .complete{border-color:#91b4a4}
+.reel-track .active{border-color:#3c594c;color:#1f4435;font-weight:700}
+.result-card{background:#fafafa;border:1px solid #e5e5e5;border-radius:14px;padding:11px 13px;margin:9px 0;font-size:.88rem}
+.result-card strong{display:block;font-size:.75rem;color:#474747;margin-bottom:2px}
+.result-card p{color:#232323}
+.result-card p+p{margin-top:5px}
+.composer{display:flex;align-items:center;gap:10px;border:1px solid #ddd;border-radius:26px;min-height:52px;padding:6px 7px 6px 14px;margin-top:15px;box-shadow:0 2px 6px #0000000d}
+.composer-text{flex:1;min-width:0;color:#525252;font-size:.82rem}
+.chat-action{flex:none;display:inline-flex;justify-content:center;align-items:center;gap:6px;min-height:39px;padding:7px 12px;background:#242424;border:1px solid #242424;border-radius:22px;color:white;font-size:.8rem;font-weight:600;line-height:1.2;text-align:center}
+.chat-action:hover{background:#424242}
+.chat-action.secondary{background:#fff;color:#232323;border-color:#dbdbdb}
+.chat-action.secondary:hover{background:#f1f1f1}
+.thread-controls{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin-top:9px}
+.micro{font-size:.74rem;color:#5f5f5f;margin-top:8px}
+.pane-details{margin-top:15px;border-top:1px solid #e6e6e6}
+.pane-details summary{display:flex;justify-content:space-between;font-size:13px;gap:8px}
+.pane-details p{padding:0 0 10px;color:#4c4c4c}
+.calc-table{width:100%;border-collapse:collapse;font-size:.84rem;margin-top:7px;text-align:left}
+.calc-table th,.calc-table td{padding:8px 5px;border-bottom:1px solid #e7e7e7}
+.calc-table thead th{color:#555;font-size:.73rem}
+.calc-table th:last-child,.calc-table td:last-child{text-align:right}
+.calc-table input,.marked-input{width:63px;max-width:100%;min-height:38px;border:1px solid #ccc;border-radius:8px;background:#fff;padding:4px 6px}
+.money{white-space:nowrap;font-variant-numeric:tabular-nums}
+.calc-table tfoot td{font-weight:650;border:0}
+.markup{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-bottom:8px}
+.task-list{list-style:none;margin:0;padding:0}
+.task-list li{display:flex;gap:8px;align-items:center;padding:9px 2px;border-bottom:1px solid #e8e8e8}
+.task-list input{width:18px;height:18px;accent-color:#222;flex:none}
+.task-list label{flex:1;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.task-list input:checked+label .task-name{color:#555;text-decoration:line-through}
+.notice{padding:10px 12px;border-radius:12px;background:#edf4ef;color:#294639;margin-top:10px;font-size:.88rem}
+.task-counter{font-size:.8rem;color:#505050;margin-top:7px}
+#agents{padding-top:28px}
+.flow-callout{margin-bottom:16px;display:flex;align-items:center;gap:10px;color:#4c4c4c;font-size:.91rem}
+.flow-callout .spark{color:#875333;font-size:23px;line-height:1;flex:none}
+.flow-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(225px,27%);gap:18px;align-items:start}
+.flow-graph{position:relative;isolation:isolate;background:var(--white);border:1px solid var(--line);border-radius:20px;padding:20px 22px 22px;display:grid;gap:25px}
+.flow-edges{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:-1;overflow:visible}
+.flow-edge{fill:none;stroke:#b5a391;stroke-width:1.5}
+.flow-edge.return{stroke:#947db6;stroke-dasharray:4 4}
+.flow-edge.focus-edge{stroke:#754126;stroke-width:2.25}
+.flow-edge.return.focus-edge{stroke:#71528e}
+.flow-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.flow-node{min-height:58px;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px;line-height:1.15;padding:7px 6px;border:1px solid #d8cec0;border-radius:12px;background:var(--white);color:var(--midnight);font-size:.84rem;font-weight:650}
+.flow-node:hover,.flow-node[aria-pressed=true]{background:#f0dfd0;border-color:#a97b61}
+.flow-node small{font-size:.63rem;color:#5c5763;font-weight:500}
+.flow-node.human{background:#efe9f9;border-color:#d4c6eb}
+.flow-node.human:hover,.flow-node.human[aria-pressed=true]{background:#e7d9f7;border-color:#9d86bd}
+.flow-node.service{background:#e9f0ea;border-color:#bdd0c3}
+.flow-node.service:hover,.flow-node.service[aria-pressed=true]{background:#dcece0;border-color:#7c9988}
+.flow-panel{position:sticky;top:16px;padding:17px 15px;background:var(--white);border:1px solid var(--line);border-radius:16px;overflow-wrap:anywhere}
+.flow-panel .eyebrow{font-size:.64rem;color:var(--slate);margin-bottom:5px}
+.flow-panel h3{font-size:1.35rem}
+.flow-panel p{font-size:.85rem;color:var(--slate);margin-top:7px}
+.flow-transfers{list-style:none;padding:0;margin:10px 0 0}
+.flow-transfers li+li{margin-top:8px}
+.flow-transfers button{background:transparent;border:0;padding:0;text-align:left;font-size:.79rem;color:#523a30;line-height:1.35;text-decoration:underline;text-underline-offset:2px}
+.flow-transfers button:hover{color:#875333}
+.flow-legend{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:12px;color:var(--slate);font-size:.8rem}
+.flow-legend .dash{color:#735993;font-weight:600}
+.flow-mobile{display:none}
+@media(max-width:930px){
+ .workbench{grid-template-columns:178px minmax(0,1fr)}.gpt-top{padding-inline:15px}.thread{padding-inline:19px}.flow-graph{padding-inline:17px}.flow-node{font-size:.78rem}
+}
+@media(max-width:680px){
+ .workbench{display:block;min-height:0;border-radius:17px}.gpt-sidebar{padding:8px;border:0;border-bottom:1px solid #e8e8e8}.gpt-brand,.sidebar-account,.sidebar-label{display:none}.project-nav{display:flex}.project-nav button{flex:1;justify-content:center;gap:5px;font-size:.83rem;padding:5px}.gpt-top{min-height:48px;padding:8px 11px}.gpt-top .gpt-tag{font-size:10px}.thread{padding:17px 12px}.user-turn{max-width:95%;font-size:.85rem}.assistant-line{gap:7px}.composer{padding-left:9px;gap:5px}.composer-text{font-size:.72rem}.chat-action{padding-inline:8px;font-size:.74rem}.reel-track span{font-size:.61rem}.calc-table{font-size:.73rem}.calc-table th,.calc-table td{padding:6px 3px}.calc-table input,.marked-input{width:48px}.task-list label{align-items:start;flex-direction:column;gap:3px}
+ .flow-layout{display:block}.flow-graph{gap:14px;padding:13px 9px}.flow-edges{display:none}.flow-row{gap:5px}.flow-node{min-height:62px;font-size:.71rem;padding:5px 4px;overflow-wrap:anywhere}.flow-node small{font-size:.58rem}
+ .flow-row+.flow-row::before{content:"↓";grid-column:1/-1;text-align:center;height:13px;line-height:12px;color:#855d45}
+ .flow-panel{position:static;margin:0 0 11px}.flow-panel p{font-size:.83rem}.flow-legend .desktop{display:none}.flow-mobile{display:inline}
+}
+.closing{position:relative;padding:58px 0 36px;overflow:hidden;background:var(--dusk)}
+.closing .wrap{position:relative;z-index:1}
+.closing h2{font-size:clamp(2.8rem,5vw,4.7rem);font-weight:300;letter-spacing:-.04em}
+.closing .eyebrow{color:var(--apricot);margin-bottom:9px}
+.start-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:22px 0 30px}
+.start-grid article{border-top:1px solid #ede7dc45;padding-top:12px}
+.start-grid h3{font-size:22px}
+.start-grid p{margin-top:5px;font-size:.91rem;color:var(--soft)}
+footer{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid #ede7dc32;padding-top:18px}
+footer p{color:var(--mist);font-size:.8rem;text-align:right}
+@media(max-width:900px){.wrap{width:calc(100% - 56px)}.hero .wrap{min-height:420px}}
+@media(max-width:680px){
+ .wrap{width:calc(100% - 32px)}header .wrap{min-height:60px}header nav{gap:14px;font-size:.78rem}header nav a:first-child{display:none}.brand small{display:none}
+ .hero .wrap{grid-template-columns:1fr;gap:0;padding-block:40px 22px}.hero h1{font-size:clamp(2.75rem,10vw,4.7rem);margin:12px 0 14px}.hero .lead{font-size:1rem}.hero-actions{margin-top:20px}.space-art{min-height:190px;width:min(360px,100%);margin:auto}.planet{width:34%}
+ section.paper{padding:43px 0}.section-heading{grid-template-columns:1fr;gap:8px;margin-bottom:17px}.section-heading h2{font-size:clamp(2.3rem,9vw,3rem)}
+ .start-grid{grid-template-columns:1fr;gap:11px}.closing{padding:39px 0 27px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="night" id="top">
+  <div class="wrap">
+    <a href="#top" class="brand" aria-label="NV · Claude, начало страницы"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 2c1.4 6.6 4.4 9.6 14 14-9.6 4.4-12.6 7.4-14 14-1.4-6.6-4.4-9.6-14-14 9.6-4.4 12.6-7.4 14-14z"/></svg>NV<small>CLAUDE</small></a>
+    <nav aria-label="Разделы демо"><a href="#demo">Пространство</a><a href="#agents">Схема агентов</a><a href="#start">Начало работы</a></nav>
+  </div>
+</header>
+<main>
+  <div class="hero night">
+    <div class="stars" aria-hidden="true"></div>
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Интерактивное демо · Дея</p>
+        <h1>Ваше рабочее<br> <em>пространство.</em></h1>
+        <p class="lead">Сметы, контент и поручения дизайн-бюро в ChatGPT. Откройте любой проект и посмотрите, как будет идти работа.</p>
+        <div class="hero-actions"><a class="button light" href="#demo">Открыть пространство <span aria-hidden="true">↓</span></a><span class="hero-note">Условные материалы и данные</span></div>
+      </div>
+      <div class="space-art" aria-hidden="true"><div class="orbit b"></div><div class="orbit c"></div><div class="planet"></div><div class="orbit"></div><span class="moon"></span><span class="star one">✦</span><span class="star two">✦</span><span class="star three">✦</span></div>
+    </div>
+    <svg class="wave" viewBox="0 0 1200 24" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 15 C280 45 465 -7 787 8 C952 17 1076 22 1200 6 V24 H0 Z"/></svg>
+  </div>
+
+  <section class="paper wrap" id="demo" aria-labelledby="demo-title">
+    <div class="section-heading">
+      <div><p class="eyebrow">Ваше пространство в ChatGPT</p><h2 id="demo-title">Три <em>проекта.</em></h2></div>
+      <p>У Вас и дизайнера будут отдельные входы в ChatGPT Business. «Контент» — общий проект. Доступ к сметам и задачам настроим по Вашим ролям.</p>
+    </div>
+    <svg width="0" height="0" aria-hidden="true" style="position:absolute;overflow:hidden">
+      <symbol id="icon-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+      <symbol id="icon-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M10 4v16M4 10h16"/></symbol>
+    </svg>
+    <div class="workbench">
+      <aside class="gpt-sidebar">
+        <div class="gpt-brand"><svg class="gpt-icon" aria-hidden="true"><use href="#icon-grid"/></svg><div><p class="gpt-name">ChatGPT</p><small>Рабочее пространство Business</small></div></div>
+        <nav class="project-nav" aria-label="Проекты">
+          <p class="sidebar-label">Проекты</p>
+          <button type="button" data-project="estimate" aria-pressed="false" aria-controls="estimate"><svg class="gpt-icon" aria-hidden="true"><use href="#icon-folder"/></svg>Сметы</button>
+          <button type="button" data-project="content" aria-pressed="true" aria-controls="content"><svg class="gpt-icon" aria-hidden="true"><use href="#icon-folder"/></svg>Контент</button>
+          <button type="button" data-project="tasks" aria-pressed="false" aria-controls="tasks"><svg class="gpt-icon" aria-hidden="true"><use href="#icon-folder"/></svg>Задачи</button>
+        </nav>
+        <div class="sidebar-account"><span class="avatar" aria-hidden="true">Д</span><div><strong>Дея</strong><small>Бюро Деи · Business</small></div></div>
+      </aside>
+
+      <div class="work-pane">
+        <div class="gpt-top"><div class="gpt-crumb"><svg class="gpt-icon" aria-hidden="true"><use href="#icon-folder"/></svg><span id="project-crumb">Контент</span></div><span class="gpt-tag">Иллюстрация интерфейса</span></div>
+        <section class="project thread" id="content" aria-labelledby="content-title">
+          <h3 class="thread-title" id="content-title">Ролик «Свет в прихожей»</h3>
+          <p class="thread-intro">Оставьте идею и файлы в чате проекта. Продюсер ведёт работу, дизайнер добавляет материалы, а Вы получаете ролик, обложку и подпись одним комплектом.</p>
+          <div class="user-turn"><span class="gpt-tag">Фото и видео объекта</span><p>Собери ролик о том, как мы добавили свет в прихожей. В папке есть кадры до и после. Хочу спокойный темп и титры.</p></div>
+          <div class="assistant-line">
+            <span class="assistant-avatar" aria-hidden="true">✧</span>
+            <div class="assistant-body" aria-live="polite">
+              <p class="assistant-label" id="current-agent">Продюсер</p>
+              <strong id="stage-title">Идея и исходники в одной карточке</strong>
+              <p id="stage-desc">Соберу карточку и передам материалы тем, кто подготовит структуру и монтаж.</p>
+              <div class="reel-track" aria-label="Этапы ролика"><span class="active" aria-current="step">Идея</span><span>Структура</span><span>Монтаж</span><span>Согласование</span><span>Metricool</span></div>
+              <div class="result-card"><strong id="bundle-label">В карточке</strong><p id="bundle-copy">Замысел, папка с кадрами до и после, пожелания к темпу и титрам.</p></div>
+            </div>
+          </div>
+          <div class="composer">
+            <span class="composer-text" id="composer-hint">Вы отправляете одну заявку</span>
+            <button class="chat-action" type="button" id="next-stage">Пройти пример →</button>
+          </div>
+          <div class="thread-controls">
+            <button class="chat-action secondary" type="button" id="reel-revision" hidden>Попросить правку</button>
+            <button class="chat-action secondary" type="button" id="reel-restart" hidden>Начать заново</button>
+            <a class="chat-action secondary" href="#agents">Открыть схему агентов ↓</a>
+          </div>
+          <details class="pane-details"><summary> Что входит в проект «Контент»</summary>
+            <p>В проекте хранятся правила подачи бюро, архив съёмок и карточки роликов с версиями. Агенты помогают искать идеи, планировать контент, готовить монтаж, обложки и тексты. Instagram подключаем через Metricool. Для Telegram и YouTube можно готовить отдельные версии материала.</p>
+          </details>
+        </section>
+
+        <section class="project thread" id="estimate" aria-labelledby="estimate-title" hidden>
+          <h3 class="thread-title" id="estimate-title">Сметы и документы по объектам</h3>
+          <p class="thread-intro">В проекте будут Ваш шаблон сметы, расценки, правила наценки и реквизиты бюро. Вы даёте объёмы или документ поставщика. Помощник собирает расчёт и отмечает, что нужно проверить.</p>
+          <div class="chats" role="group" aria-label="Примеры работы со сметами"><button type="button" data-chat="estimate-volume" aria-pressed="true" aria-controls="estimate-volume">Смета по объёмам</button><button type="button" data-chat="estimate-supplier" aria-pressed="false" aria-controls="estimate-supplier">Документ поставщика</button></div>
+          <div id="estimate-volume">
+            <div class="user-turn">Подготовь смету по ремонту прихожей. Возьми расценки из справочника, объёмы указаны ниже.</div>
+            <div class="assistant-line"><span class="assistant-avatar" aria-hidden="true">✧</span><div class="assistant-body"><p class="assistant-label">Сметы</p><p>Собрала черновик по трём работам. Измените объём в примере, чтобы увидеть новый итог.</p>
+              <table class="calc-table estimate">
+                <thead><tr><th scope="col">Работа</th><th scope="col">м²</th><th scope="col">За м²</th><th scope="col">Сумма</th></tr></thead>
+                <tbody>
+                  <tr data-rate="480"><th scope="row">Грунтовка</th><td><input type="number" value="18" min="0" max="10000" step="any" inputmode="decimal" aria-label="Объём грунтовки, м²"></td><td class="money">480 ₽</td><td class="money row-total">8 640 ₽</td></tr>
+                  <tr data-rate="1050"><th scope="row">Окраска</th><td><input type="number" value="18" min="0" max="10000" step="any" inputmode="decimal" aria-label="Объём окраски, м²"></td><td class="money">1 050 ₽</td><td class="money row-total">18 900 ₽</td></tr>
+                  <tr data-rate="1550"><th scope="row">Укладка плитки</th><td><input type="number" value="7" min="0" max="10000" step="any" inputmode="decimal" aria-label="Объём укладки плитки, м²"></td><td class="money">1 550 ₽</td><td class="money row-total">10 850 ₽</td></tr>
+                </tbody>
+                <tfoot><tr><td colspan="3">Итого</td><td class="money"><output id="estimate-total">38 390 ₽</output></td></tr></tfoot>
+              </table>
+              <p class="micro" id="estimate-status" aria-live="polite">Условные расценки</p>
+            </div></div>
+          </div>
+          <div id="estimate-supplier" hidden>
+            <div class="user-turn"><span class="gpt-tag">Счёт поставщика · пример</span><p>Возьми из счёта позиции и количество. Добавь согласованную наценку и подготовь наше предложение заказчику.</p></div>
+            <div class="assistant-line"><span class="assistant-avatar" aria-hidden="true">✧</span><div class="assistant-body"><p class="assistant-label">Сметы</p><p>Взяла закупочные цены из исходника. Рассчитала новые суммы и подготовила черновик по шаблону бюро.</p>
+              <div class="result-card">
+                <label class="markup" for="markup-value">Наценка на позиции <input class="marked-input" type="number" id="markup-value" value="15" min="0" max="100" step="any" inputmode="decimal"> %</label>
+                <p>Светильники · 4 шт. × 2 400 ₽ = 9 600 ₽</p><p>Расходные материалы · 1 комплект × 2 400 ₽ = 2 400 ₽</p><p>Всего у поставщика · 12 000 ₽</p>
+                <p><b>Итого в нашем предложении · <output id="supplier-total">13 800 ₽</output></b></p>
+              </div><p class="micro">Условный расчёт. Дея проверяет позиции, наценку, реквизиты и суммы перед отправкой.</p>
+            </div></div>
+          </div>
+          <details class="pane-details"><summary>Какие материалы и документы можно использовать</summary>
+            <p>Загрузите свой шаблон, готовую смету для сверки и расценки. Для разбора поставок можно приложить счёт, накладную или УПД. Помощник извлечёт позиции, количество и цены, сохранит связь с источником и отметит расхождения.</p>
+            <p>На базе проверенных данных можно собрать черновик собственного предложения, счёта или договора по Вашему согласованному шаблону. Поставщик остаётся указан в исходном документе. Форматы выгрузки согласуем по тому, как Вы сейчас ведёте сметы.</p>
+          </details>
+        </section>
+
+        <section class="project thread" id="tasks" aria-labelledby="tasks-title" hidden>
+          <h3 class="thread-title" id="tasks-title">Поручения, сроки и напоминания</h3>
+          <p class="thread-intro">Передайте заметки со встречи или продиктуйте договорённости. Помощник предложит поручения по объектам, укажет сроки и ответственных, а спорные детали вынесет на уточнение.</p>
+          <div class="chats" role="group" aria-label="Примеры работы с задачами"><button type="button" data-chat="tasks-list" aria-pressed="true" aria-controls="tasks-list">Реестр задач</button><button type="button" data-chat="tasks-mail" aria-pressed="false" aria-controls="tasks-mail">Письмо → поручение</button></div>
+          <div id="tasks-list">
+            <div class="user-turn">Что нужно сделать по прихожей сегодня и что на завтра? Напомни дизайнеру про его задачу в 17:00.</div>
+            <div class="assistant-line"><span class="assistant-avatar" aria-hidden="true">✧</span><div class="assistant-body"><p class="assistant-label">Задачи</p><p>Вот открытые поручения. Отметьте выполненное или посмотрите пример напоминания.</p>
+              <ul class="task-list">
+                <li><input type="checkbox" id="task-light"><label for="task-light"><span class="task-name">Уточнить схему освещения</span><span class="gpt-tag">Дизайнер · сегодня</span></label></li>
+                <li><input type="checkbox" id="task-estimate"><label for="task-estimate"><span class="task-name">Сверить объёмы сметы</span><span class="gpt-tag">Дея · завтра</span></label></li>
+                <li><input type="checkbox" id="task-reel"><label for="task-reel"><span class="task-name">Посмотреть версию ролика</span><span class="gpt-tag">Дея · завтра</span></label></li>
+                <li id="mail-task-row" hidden><input type="checkbox" id="task-mail-sample"><label for="task-mail-sample"><span class="task-name">Подтвердить дату поставки</span><span class="gpt-tag">Дея · сегодня</span></label></li>
+              </ul>
+              <p class="task-counter" id="task-count" aria-live="polite">Открыто 3</p>
+              <div class="thread-controls"><button type="button" class="chat-action secondary" id="show-reminder" aria-controls="reminder" aria-expanded="false">Показать напоминание</button></div>
+              <p class="notice" id="reminder" role="status" hidden>Пример уведомления · Сегодня, 17:00. Уточните схему освещения по объекту.</p>
+            </div></div>
+          </div>
+          <div id="tasks-mail" hidden>
+            <div class="user-turn">Покажи письма, где от меня ждут ответа или решения.</div>
+            <div class="assistant-line"><span class="assistant-avatar" aria-hidden="true">✧</span><div class="assistant-body"><p class="assistant-label">Почтовый помощник</p><p>В примере нашла письмо поставщика. Он просит подтвердить дату поставки до конца дня.</p>
+              <div class="result-card"><strong>Предложение для реестра</strong><p>Подтвердить дату поставки · Дея · сегодня. В рабочей версии к поручению прикрепляется ссылка на письмо, если она доступна.</p></div>
+              <div class="thread-controls"><button class="chat-action" type="button" id="accept-mail-task">Добавить в реестр</button><span class="micro" id="mail-status" role="status"></span></div>
+            </div></div>
+          </div>
+          <details class="pane-details"><summary>Как помощник ведёт задачи</summary>
+            <p>По запросу «Что сегодня?» выводит просроченное и ближайшие сроки. При переносе обновляет ту же задачу. Напоминания настраиваем на согласованное время и проверяем доставку.</p>
+            <p>После подключения рабочей почты можно включить сводку важных писем и предложения поручений. Согласуем, какие письма учитывать, кому видны задачи и кто подтверждает ответы.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <section class="paper wrap" id="agents" aria-labelledby="agents-title">
+    <div class="section-heading">
+      <div><p class="eyebrow">Контент-завод · 13 агентов</p><h2 id="agents-title">От идеи <em>до публикации.</em></h2></div>
+      <p>Вы даёте идею продюсеру. После настройки агенты будут сами передавать задания и результаты через общую карточку ролика. Вы смотрите готовый комплект и решаете, выпускать ли его.</p>
+    </div>
+    <p class="flow-callout"><span class="spark" aria-hidden="true">✦</span>Нажмите на роль и посмотрите, от кого она получает работу и кому передаёт результат.</p>
+    <div class="flow-layout">
+      <div class="flow-graph" id="flow-graph" aria-label="Схема передачи работы между агентами">
+        <svg class="flow-edges" id="flow-edges" aria-hidden="true"><defs>
+          <marker id="flow-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="#9b806b"/></marker>
+          <marker id="return-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="#947db6"/></marker>
+        </defs></svg>
+      </div>
+      <aside class="flow-panel" id="flow-panel" aria-live="polite">
+        <p class="eyebrow" id="flow-type">Вы</p>
+        <h3 id="flow-title">Идея и исходники</h3>
+        <p id="flow-summary">Вы описываете, какой ролик хотите, и прикладываете материалы.</p>
+        <ul class="flow-transfers" id="flow-transfers"></ul>
+      </aside>
+    </div>
+    <p class="flow-legend"><span class="desktop">Сплошная стрелка · передача материалов</span><span class="dash desktop">Пунктир · правки и обратная связь</span><span class="flow-mobile">В карточке видны входящие и исходящие связи, включая правки.</span></p>
+  </section>
+  <section class="closing night" id="start" aria-labelledby="start-title">
+    <div class="wrap">
+      <p class="eyebrow">Начало работы</p><h2 id="start-title">Начнём <em>с одного объекта.</em></h2>
+      <div class="start-grid">
+        <article><h3>От Вас</h3><p>Исходники и идея одного ролика, пример сметы с расценками и несколько текущих поручений.</p></article>
+        <article><h3>Подключение</h3><p>Я настрою проекты и роли, подключу инструмент монтажа и проверю связку с Вашим Instagram через Metricool.</p></article>
+        <article><h3>Первая проверка</h3><p>Вы посмотрите ролик, дадите правку и утвердите комплект. Мы проверим, как он попадает в календарь.</p></article>
+      </div>
+      <footer><a class="button ghost" href="#demo">Вернуться к демо <span aria-hidden="true">↑</span></a><p>NV · Персональная настройка ИИ</p></footer>
+    </div>
+  </section>
+</main>
+<script>
+const byId = id => document.getElementById(id);
+function wirePanels(attribute, onSelect = () => {}) {
+  for (const button of document.querySelectorAll('[' + attribute + ']')) {
+    button.addEventListener('click', () => {
+      const group = button.parentElement.querySelectorAll('[' + attribute + ']');
+      group.forEach(peer => {
+        const selected = peer === button;
+        peer.setAttribute('aria-pressed', String(selected));
+        byId(peer.getAttribute(attribute)).hidden = !selected;
+      });
+      onSelect(button);
+    });
+  }
+}
+wirePanels('data-project', button => { byId('project-crumb').textContent = button.textContent.trim(); });
+wirePanels('data-chat');
+
+const stages = [
+  ['Продюсер', 'Идея и исходники в одной карточке', 'Соберу карточку и передам материалы тем, кто подготовит структуру и монтаж.', 'В карточке', 'Замысел, папка с кадрами до и после, пожелания к темпу и титрам.', 'Пройти пример', 'Вы отправляете одну заявку'],
+  ['Проектировщик Reels', 'Структура ролика готова', 'Я получил карту материалов от медиабиблиотекаря. Передаю сценаристу порядок кадров и то, что нужно сказать.', 'Фрагмент плана', '0–3 с · прихожая до ремонта. 3–12 с · решение со светом. Финал · тот же ракурс после ремонта.', 'Посмотреть сборку', 'Агенты обмениваются результатами через карточку'],
+  ['Монтажёр', 'Собираю первую версию', 'Получил план и сценарий. Передаю черновик редактору титров и звука. В это же время дизайнер обложек и копирайтер готовят материалы для выпуска.', 'Комплект в работе', 'Вертикальный MP4, обложка «Как мы добавили свет» и подпись для Instagram.', 'Открыть согласование', 'Обложка и подпись готовятся параллельно'],
+  ['Продюсер', 'Комплект на Ваше согласование', 'Контроль качества проверил ролик, факты, звук, титры и подпись. Посмотрите комплект и решите, готов ли он к выходу.', 'Версия 1', 'Ролик «Свет в прихожей», обложка и подпись. Предлагаемый слот — пятница, 18:30 МСК.', 'Утвердить в демо', 'Вы можете вернуть комплект на правку'],
+  ['Публикатор Instagram', 'Утверждённый ролик в календаре Metricool', 'Публикатор сверяет аккаунт, вложение и время. После выхода аналитик передаст результаты редактору контент-плана.', 'Пример записи Metricool', 'Instagram Reels · «Свет в прихожей» · пятница, 18:30 МСК · запланировано в демо.', '', 'Следующий шаг после выхода — собрать метрики']
+];
+let stage = 0;
+let revised = false;
+const nextStage = byId('next-stage');
+const revise = byId('reel-revision');
+const restart = byId('reel-restart');
+const progress = [...document.querySelectorAll('.reel-track span')];
+function showStage() {
+  const [agent, title, desc, label, sample, action, hint] = stages[stage];
+  byId('current-agent').textContent = agent;
+  byId('stage-title').textContent = title;
+  byId('stage-desc').textContent = stage === 3 && revised ? 'Я передала правку монтажёру. Редактор титров и агент контроля качества проверили новую версию перед повторным согласованием.' : desc;
+  byId('bundle-label').textContent = stage === 3 && revised ? 'Версия 2' : label;
+  byId('bundle-copy').textContent = stage === 3 && revised ? '«Сократите вступление и увеличьте титры». Монтажёр внёс обе правки. Обложка и подпись собраны вместе с обновлённым роликом.' : (stage === 4 && revised ? sample.replace('» ·', '» · версия 2 ·') : sample);
+  byId('composer-hint').textContent = hint;
+  nextStage.hidden = !action;
+  nextStage.textContent = action ? action + ' →' : '';
+  revise.hidden = stage !== 3 || revised;
+  restart.hidden = stage === 0;
+  progress.forEach((item, index) => {
+    item.classList.toggle('complete', index < stage);
+    item.classList.toggle('active', index === stage);
+    if (index === stage) item.setAttribute('aria-current', 'step');
+    else item.removeAttribute('aria-current');
+  });
+}
+nextStage.addEventListener('click', () => {
+  if (stage >= stages.length - 1) return;
+  stage++;
+  showStage();
+  if (nextStage.hidden) restart.focus();
+});
+revise.addEventListener('click', () => { revised = true; showStage(); nextStage.focus(); });
+restart.addEventListener('click', () => { stage = 0; revised = false; showStage(); nextStage.focus(); });
+showStage();
+
+const currency = new Intl.NumberFormat('ru-RU', {style:'currency',currency:'RUB',maximumFractionDigits:2,minimumFractionDigits:0});
+const estimateRows = [...document.querySelectorAll('.estimate tbody tr')];
+function recalculate() {
+  let total = 0;
+  let missing = 0;
+  for (const row of estimateRows) {
+    const input = row.querySelector('input');
+    const amount = input.valueAsNumber;
+    const usable = Number.isFinite(amount) && input.validity.valid;
+    const lineTotal = usable ? Math.round(amount * Number(row.dataset.rate) * 100) : 0;
+    row.querySelector('.row-total').textContent = usable ? currency.format(lineTotal / 100) : '—';
+    total += lineTotal;
+    if (!usable) missing++;
+  }
+  byId('estimate-total').textContent = currency.format(total / 100);
+  byId('estimate-status').textContent = missing ? 'Итог включает только строки с объёмом от 0 до 10 000 м².' : 'Условные расценки';
+}
+estimateRows.forEach(row => row.querySelector('input').addEventListener('input', recalculate));
+recalculate();
+
+const markupInput = byId('markup-value');
+markupInput.addEventListener('input', () => {
+  const markup = markupInput.valueAsNumber;
+  byId('supplier-total').textContent = Number.isFinite(markup) && markupInput.validity.valid
+    ? currency.format(12000 * (1 + markup / 100))
+    : 'укажите наценку от 0 до 100%';
+});
+
+const taskList = document.querySelector('.task-list');
+function updateTaskCount() {
+  const count = [...taskList.querySelectorAll('input')].filter(task => !task.closest('li').hidden && !task.checked).length;
+  byId('task-count').textContent = count ? 'Открыто ' + count : 'Всё выполнено';
+}
+taskList.addEventListener('change', updateTaskCount);
+byId('accept-mail-task').addEventListener('click', event => {
+  byId('mail-task-row').hidden = false;
+  updateTaskCount();
+  event.currentTarget.disabled = true;
+  event.currentTarget.textContent = 'В реестре';
+  byId('mail-status').textContent = 'Поручение добавлено в демо.';
+});
+byId('show-reminder').addEventListener('click', event => {
+  const reminder = byId('reminder');
+  reminder.hidden = !reminder.hidden;
+  event.currentTarget.setAttribute('aria-expanded', String(!reminder.hidden));
+  event.currentTarget.textContent = reminder.hidden ? 'Показать напоминание' : 'Скрыть напоминание';
+});
+
+const nodes = {
+  idea: ['Идея и исходники', 'Вы', 'Вы описываете, какой ролик хотите, и прикладываете материалы.', 'human'],
+  producer: ['Продюсер', 'Агент 01', 'Оформляет карточку ролика, запускает нужные этапы и возвращает правку агенту, который может её внести.'],
+  research: ['Исследователь идей', 'Агент 02 · при необходимости', 'Находит открытые референсы и предлагает темы. Подключается, если нужно развить или проверить идею.'],
+  calendar: ['Редактор контент-плана', 'Агент 03', 'Выбирает рубрику и место в календаре. Использует результаты прошлых публикаций.'],
+  media: ['Медиабиблиотекарь', 'Агент 04', 'Просматривает материалы и отмечает пригодные фрагменты. Указывает, чего не хватает.'],
+  reel: ['Проектировщик Reels', 'Агент 05', 'Определяет первые секунды, структуру ролика и последовательность кадров.'],
+  script: ['Сценарист', 'Агент 06', 'Готовит реплики, закадровый текст или предложение досъёмки по структуре ролика.'],
+  edit: ['Монтажёр', 'Агент 07', 'Собирает видео через инструмент монтажа. После правок отдаёт новую версию MP4.'],
+  captions: ['Редактор титров и звука', 'Агент 08', 'Сверяет титры с речью, проверяет звук и возвращает точные правки монтажёру.'],
+  cover: ['Дизайнер обложек', 'Агент 09', 'Подбирает кадр, заголовок и компоновку обложки.'],
+  copy: ['Копирайтер', 'Агент 10', 'Пишет подпись и при необходимости адаптирует текст для Telegram и YouTube.'],
+  quality: ['Контроль качества', 'Агент 11', 'Собирает на проверку MP4, обложку и подпись. Сверяет их с брифом и возвращает ошибки на правку.'],
+  approval: ['Согласование', 'Вы', 'Вы видите видео, обложку и подпись. Утверждаете комплект или возвращаете конкретную правку.', 'human'],
+  publisher: ['Публикатор Instagram', 'Агент 12', 'Сверяет утверждённую версию, аккаунт и время. Планирует выход через Metricool.'],
+  metricool: ['Metricool → Instagram', 'Подключённый сервис', 'Принимает готовый комплект и ставит его в календарь Instagram.', 'service'],
+  analytics: ['Аналитик', 'Агент 13', 'Смотрит доступные метрики после выхода, предлагает тему или приём для следующего ролика.']
+};
+const lanes = [
+  [null, 'idea'], [null, 'producer'], ['research', null, 'media'],
+  ['calendar', 'reel'], [null, 'script'],
+  ['edit', 'cover', 'copy'], ['captions', 'quality'],
+  [null, 'approval'], [null, 'publisher'], [null, 'metricool'], [null, 'analytics']
+];
+const transfers = [
+  ['idea', 'producer', 'Замысел и исходники'],
+  ['producer', 'research', 'Бриф и вопрос для поиска'],
+  ['producer', 'media', 'Папка с материалами'],
+  ['research', 'calendar', 'Референсы и темы'],
+  ['calendar', 'reel', 'Рубрика, тема и площадка'],
+  ['media', 'reel', 'Подборка кадров и таймкоды'],
+  ['reel', 'script', 'Структура и порядок кадров'],
+  ['script', 'edit', 'План, исходники и текст'],
+  ['script', 'cover', 'Смысл ролика и ключевые кадры'],
+  ['script', 'copy', 'Сюжет и проверенные факты'],
+  ['edit', 'captions', 'Черновой MP4'],
+  ['captions', 'edit', 'Файл субтитров и правки звука', 'near'],
+  ['edit', 'quality', 'Обновлённый MP4'],
+  ['captions', 'quality', 'Результат проверки титров и звука'],
+  ['cover', 'quality', 'Обложка'],
+  ['copy', 'quality', 'Подпись'],
+  ['quality', 'approval', 'Проверенный комплект'],
+  ['quality', 'producer', 'Замечания к версии', 'right'],
+  ['approval', 'producer', 'Правки к комплекту', 'right'],
+  ['approval', 'publisher', 'Утверждённая версия и время'],
+  ['publisher', 'metricool', 'Ролик, обложка, подпись и слот'],
+  ['metricool', 'analytics', 'Доступные метрики ролика'],
+  ['analytics', 'calendar', 'Темы и гипотезы на следующий выпуск', 'left']
+];
+const graph = byId('flow-graph');
+const diagram = byId('flow-edges');
+const flowPanel = byId('flow-panel');
+const transferList = byId('flow-transfers');
+const compactFlow = matchMedia('(max-width:680px)');
+const svgNS = 'http://www.w3.org/2000/svg';
+const buttons = new Map();
+let flowSelection = 'idea';
+
+for (const lane of lanes) {
+  const row = document.createElement('div');
+  row.className = 'flow-row';
+  lane.forEach((key, column) => {
+    if (!key) return;
+    const [title, type, , kind] = nodes[key];
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'flow-node' + (kind ? ' ' + kind : '');
+    button.style.gridColumn = String(column + 1);
+    button.setAttribute('aria-pressed', 'false');
+    button.setAttribute('aria-controls', 'flow-panel');
+    const name = document.createElement('span');
+    name.textContent = title;
+    const annotation = document.createElement('small');
+    annotation.textContent = type;
+    button.append(name, annotation);
+    row.append(button);
+    buttons.set(key, button);
+    button.addEventListener('click', () => selectNode(key));
+  });
+  graph.append(row);
+}
+const paths = transfers.map(edge => {
+  const path = document.createElementNS(svgNS, 'path');
+  path.setAttribute('class', edge[3] ? 'flow-edge return' : 'flow-edge');
+  path.setAttribute('marker-end', edge[3] ? 'url(#return-arrow)' : 'url(#flow-arrow)');
+  diagram.append(path);
+  return path;
+});
+
+function drawArrows() {
+  if (compactFlow.matches) return;
+  const bounds = graph.getBoundingClientRect();
+  const box = key => {
+    const el = buttons.get(key).getBoundingClientRect();
+    return {left:el.left-bounds.left, right:el.right-bounds.left,
+      top:el.top-bounds.top, bottom:el.bottom-bounds.top,
+      x:(el.left+el.right)/2-bounds.left, y:(el.top+el.bottom)/2-bounds.top};
+  };
+  transfers.forEach(([from, to, , loop], index) => {
+    const a = box(from);
+    const b = box(to);
+    let line;
+    if (loop) {
+      const right = loop === 'right';
+      const fromX = right ? a.right : a.left;
+      const toX = right ? b.right : b.left;
+      const rail = right ? bounds.width - (from === 'approval' ? 11 : 17) : (loop === 'near' ? 13 : 5);
+      line = ['M', fromX, a.y, 'H', rail, 'V', b.y, 'H', toX + (right ? 3 : -3)].join(' ');
+    } else if (Math.abs(a.y - b.y) < 3) {
+      line = ['M', a.right, a.y, 'H', b.left - 2].join(' ');
+    } else {
+      const y = (a.bottom + b.top) / 2;
+      line = ['M', a.x, a.bottom, 'C', a.x, y, b.x, y, b.x, b.top - 2].join(' ');
+    }
+    paths[index].setAttribute('d', line);
+    paths[index].classList.toggle('focus-edge', from === flowSelection || to === flowSelection);
+  });
+}
+
+function placeFlowPanel() {
+  if (compactFlow.matches) buttons.get(flowSelection).parentElement.after(flowPanel);
+  else graph.after(flowPanel);
+  drawArrows();
+}
+
+function selectNode(key, moveFocus = false) {
+  flowSelection = key;
+  const [title, type, summary] = nodes[key];
+  byId('flow-type').textContent = type;
+  byId('flow-title').textContent = title;
+  byId('flow-summary').textContent = summary;
+  buttons.forEach((button, name) => button.setAttribute('aria-pressed', String(name === key)));
+  transferList.replaceChildren();
+  for (const [from, to, label] of transfers) {
+    if (from !== key && to !== key) continue;
+    const outgoing = key === from;
+    const other = outgoing ? to : from;
+    const item = document.createElement('li');
+    const link = document.createElement('button');
+    link.type = 'button';
+    link.textContent = (outgoing ? '→ ' : '← ') + nodes[other][0] + ' · ' + label;
+    link.addEventListener('click', () => selectNode(other, true));
+    item.append(link);
+    transferList.append(item);
+  }
+  placeFlowPanel();
+  if (moveFocus) buttons.get(key).focus();
+}
+
+compactFlow.addEventListener('change', placeFlowPanel);
+new ResizeObserver(drawArrows).observe(graph);
+selectNode('idea');
+
+const stars = document.querySelector('.stars');
+for (let i = 0; i < 46; i++) {
+  const star = document.createElement('i');
+  star.style.left = ((i * 173 + 57) % 997) / 10 + '%';
+  star.style.top = ((i * 137 + 19) % 929) / 10 + '%';
+  star.style.opacity = .10 + (i % 6) * .08;
+  stars.append(star);
+}
+</script>
+</body>
+</html>
